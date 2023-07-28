@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { Providers } from "./providers";
+import Nav from "@/components/Nav";
 
 const jose = Josefin_Sans({
   subsets: ["latin"],
@@ -19,11 +21,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-stone-800">
       <body className={jose.className}>
-        {children}
+        <Providers>
+          <div className="relative flex flex-col h-screen">
+            <Nav />
+            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+              {children}
+            </main>
+            <footer className="w-full flex items-center justify-center py-3">
+              huse kivrak
+            </footer>
+          </div>
+        </Providers>
         <Analytics />
-        </body>
+      </body>
     </html>
   );
 }
