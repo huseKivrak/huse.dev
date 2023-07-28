@@ -10,11 +10,11 @@ import Image from "next/image";
 
 export default function Projects(): JSX.Element {
   return (
-    <section id="projects" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <section id="projects" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 font-light">
       <h2 className="text-stone-100 text-4xl font-extralight tracking-widest col-span-full">projects</h2>
       {PROJECTS.map((project, index) => (
         <Card
-          className="py-4 bg-stone-700 border border-stone-400 text-stone-200"
+          className="py-4 bg-transparent border border-stone-300 text-stone-200"
           key={`${project.title}-${index}`}
           tabIndex={0}
         >
@@ -50,7 +50,7 @@ export default function Projects(): JSX.Element {
               return (
                 <span
                   key={index}
-                  className="inline-flex items-center bg-stone-600 text-stone-100 text-sm font-light px-2 py-1"
+                  className="inline-flex items-center bg-transparent border border-stone-300 text-stone-100 text-sm font-light px-2 py-1"
                 >
                   {tag}
                 </span>

@@ -13,14 +13,14 @@ import { SlMenu } from "react-icons/sl";
 
 export default function Nav() {
   return (
-    <Navbar isBordered maxWidth="xl" position="sticky" className="bg-stone-500">
+    <Navbar isBordered maxWidth="xl" position="sticky" className="bg-transparent font-light tracking-widest">
       <NavbarContent
         className="flex flex-col sm:flex-row justify-between w-full"
         justify="start"
       >
         <NavbarBrand as="li" className="hidden sm:flex gap-3 max-w-fit">
           <Link className="flex justify-start items-center gap-1" href="/">
-            <p className="font-bold text-stone-800 hover:text-stone-300">
+            <p className="font-semibold text-stone-100 hover:text-stone-300">
               huse
             </p>
           </Link>
@@ -29,7 +29,7 @@ export default function Nav() {
           {NAV_LINKS.map((item) => (
             <NavbarItem key={item.url} className="mx-4">
               <Link
-                className="text-stone-800 hover:text-stone-300"
+                className="text-stone-100 hover:text-stone-300"
                 color="foreground"
                 href={item.url}
               >
@@ -41,7 +41,7 @@ export default function Nav() {
         <Disclosure as="nav" className="sm:hidden w-full">
           {({ open }) => (
             <>
-              <Disclosure.Button className="inline-flex items-center p-2 rounded-md text-gray-400 hover:text-stone-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+              <Disclosure.Button aria-label="Navigation" className="inline-flex items-center p-2 rounded-md text-gray-400 hover:text-stone-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                 <SlMenu
                   className={clsx("block h-6 w-6", {
                     "transform rotate-90": open,
