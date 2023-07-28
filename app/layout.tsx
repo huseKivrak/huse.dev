@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-stone-800">
+    <html lang="en" className="bg-stone-800 tracking-wider">
       <body className={jose.className}>
         <Providers>
           <div className="relative flex flex-col h-screen">
@@ -29,7 +29,7 @@ export default function RootLayout({
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
             </main>
-            <footer className="w-full flex items-center justify-center py-3">
+            <footer className="text-stone-300 w-full flex items-center justify-center py-3">
               huse kivrak
             </footer>
           </div>
