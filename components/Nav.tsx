@@ -25,7 +25,7 @@ export default function Nav() {
         </NavbarBrand>
         <div className="hidden sm:flex gap-4">
           {NAV_LINKS.map((item) => (
-            <NavbarItem key={item.href} className="mx-4">
+            <NavbarItem key={item.url} className="mx-4">
               <Link
                 className="text-stone-800 hover:text-stone-400"
                 color="foreground"
@@ -50,7 +50,7 @@ export default function Nav() {
               <Disclosure.Panel className="px-2 pt-2 pb-3 space-y-1 justify-start">
                 {NAV_LINKS.map((item) => (
                   <Link
-                    key={item.href}
+                    key={item.url}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     href={item.url}
                   >
@@ -62,20 +62,6 @@ export default function Nav() {
           )}
         </Disclosure>
       </NavbarContent>
-      {/* <NavbarBrand>
-        <Link href="/">huse</Link>
-      </NavbarBrand>
-      <NavbarContent className="hidden sm:flex basis-1 sm:basis-full gap-4" justify="end">
-        {NAV_LINKS.map((navlink, index) => {
-          return (
-            <NavbarItem key={index}>
-              <Navlink as={Link} color="foreground" href={navlink.url}>
-                {navlink.name}
-              </Navlink>
-            </NavbarItem>
-          );
-        })} */}
-      {/* </NavbarContent> */}
     </Navbar>
   );
 }
