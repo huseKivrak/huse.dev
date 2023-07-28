@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.16",
-    "@nextui-org/react": "^0.0.0-dev-v2-20230728152928",
+    "@nextui-org/react": "^0.0.0-dev-v2-20230728201112",
     "@types/node": "20.4.5",
     "@types/react": "18.2.17",
     "@types/react-dom": "18.2.7",
