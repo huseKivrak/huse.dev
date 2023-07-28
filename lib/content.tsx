@@ -25,3 +25,14 @@ export const PROJECTS: Project[] = [
     tags: ["React Native", "TypeScript"],
   },
 ];
+
+export const NAV_LINKS = [
+    {
+        name: 'about',
+        url: "#about",
+    },
+    {
+        name: 'projects',
+        url: "#projects",
+    }
+]
