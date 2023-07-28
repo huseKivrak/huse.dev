@@ -1,7 +1,7 @@
 
-export default function About (){
+export default function About():JSX.Element {
     return (
-        <div>
+        <div id="about">
 
         </div>
     )
