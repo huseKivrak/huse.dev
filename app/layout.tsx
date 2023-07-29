@@ -29,8 +29,8 @@ export default function RootLayout({
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
             </main>
-            <footer className="text-stone-300 w-full flex items-center justify-center py-3">
-              huse kivrak
+            <footer className="text-stone-300 font-extralight w-full flex items-center justify-center py-3">
+              &copy; huse kivrak 2023
             </footer>
           </div>
         </Providers>
