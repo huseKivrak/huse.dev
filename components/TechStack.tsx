@@ -1,6 +1,6 @@
 import * as Icons from "react-icons/si";
 import { Tech } from "@/lib/types";
-import { Tooltip } from "@nextui-org/tooltip";
+import {Tooltip} from "@/components/ui/tooltip";
 
 /** TECH STACK */
 export const TECHS: Tech[] = [
@@ -28,14 +28,10 @@ export default function TechIcons() {
       className="grid grid-cols-5 gap-y-3 gap-x-6 max-w-fit p-2 rounded-md"
     >
       {TECHS.map((tech) => (
-        //@ts-expect-error (for hideArrow prop)
-        <Tooltip content={tech.title} placement="top" key={tech.title} hidearrow="true">
-          <tech.Icon
-            key={tech.title}
-            className={`text-4xl ${tech.color} hover:text-white transition duration-300 ease-in-out`}
-          />
-        </Tooltip>
-
+        <tech.Icon
+          key={tech.title}
+          className={`text-4xl ${tech.color} hover:text-white transition duration-300 ease-in-out`}
+        />
       ))}
     </div>
   );

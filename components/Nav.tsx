@@ -1,67 +1,76 @@
 "use client";
-import clsx from "clsx";
+
 import { NAV_LINKS } from "@/lib/content";
 import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from "@nextui-org/navbar";
-import Link from "next/link";
-import { Disclosure } from "@headlessui/react";
-import { SlMenu } from "react-icons/sl";
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+
+import Link from "next/link";
+import { SlMenu } from "react-icons/sl";
 export default function Nav() {
   return (
-    <Navbar isBordered maxWidth="xl" position="sticky" className="bg-transparent font-light tracking-widest">
-      <NavbarContent
-        className="flex flex-col sm:flex-row justify-between w-full"
-        justify="start"
-      >
-        <NavbarBrand as="li" className="hidden sm:flex gap-3 max-w-fit">
-          <Link className="flex justify-start items-center gap-1" href="/">
-            <p className="font-semibold text-stone-100 hover:text-stone-300">
-              huse
-            </p>
-          </Link>
-        </NavbarBrand>
-        <div className="hidden sm:flex gap-4">
-          {NAV_LINKS.map((item) => (
-            <NavbarItem key={item.url} className="mx-4">
-              <Link
-                className="text-stone-100 hover:text-stone-300"
-                color="foreground"
-                href={item.url}
-              >
-                {item.name}
-              </Link>
-            </NavbarItem>
-          ))}
-        </div>
-        <Disclosure as="nav" className="sm:hidden w-full">
-          {({ open }) => (
-            <>
-              <Disclosure.Button aria-label="Navigation" className="inline-flex items-center p-2 rounded-md text-gray-400 hover:text-stone-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                <SlMenu
-                  className={clsx("block h-6 w-6", {
-                    "transform rotate-90": open,
-                  })}
-                  aria-hidden="true"
-                />
-              </Disclosure.Button>
-              <Disclosure.Panel className="px-2 pt-2 pb-3 space-y-1 justify-start">
-                {NAV_LINKS.map((item) => (
-                  <Link key={item.url} href={item.url}>
-                    <span className="text-gray-300 hover:bg-gray-700 hover:text-stone-700 block px-3 py-2 rounded-md text-base font-medium">
-                      {item.name}
-                    </span>
-                  </Link>
-                ))}
-              </Disclosure.Panel>
-            </>
-          )}
-        </Disclosure>
-      </NavbarContent>
-    </Navbar>
+    <div className="bg-transparent font-light tracking-widest max-w-xl sticky">
+      <NavigationMenu>
+        <NavigationMenuList className="md:flex hidden justify-start">
+          <NavigationMenuItem className="gap-3 max-w-fit sm:flex hidden">
+            <Link className="flex justify-start items-center gap-1" href="/">
+              <p className="font-semibold text-lg  hover:text-stone-300">
+                huse
+              </p>
+            </Link>
+          </NavigationMenuItem>
+          <div className="gap-4 hidden sm:flex">
+            {NAV_LINKS.map((link, index) => (
+              <NavigationMenuItem key={index} className="mx-4">
+                <Link
+                  className="hover:text-stone-500"
+                  color="foreground"
+                  href={link.url}
+                >
+                  {link.name}
+                </Link>
+              </NavigationMenuItem>
+            ))}
+          </div>
+        </NavigationMenuList>
+      </NavigationMenu>
+      <HamburgerMenu />
+    </div>
   );
 }
+
+const HamburgerMenu = () => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          className="md:hidden p-2 inline-flex items-center rounded-md bg-transparent hover:text-stone-100 hover:bg-stone-700"
+          variant="default"
+          size="icon"
+        >
+          <SlMenu />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="px-2 pt-2 pb-3 space-y-1 justify-start bg-transparent border-transparent">
+        {NAV_LINKS.map((link, index) => (
+          <Link
+            key={index}
+            href={link.url}
+            className="p-2 text-stone-200 bg-transparent hover:text-stone-600 "
+          >
+            {link.name}
+          </Link>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};

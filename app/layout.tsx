@@ -2,7 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import { Providers } from "./providers";
 import Nav from "@/components/Nav";
 
 const jose = Josefin_Sans({
@@ -21,9 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-stone-800 tracking-wider">
-      <body className={jose.className}>
-        <Providers>
+    <html lang="en" className={jose.className}>
+      <body>
           <div className="relative flex flex-col h-screen">
             <Nav />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
@@ -33,7 +31,6 @@ export default function RootLayout({
               &copy; huse kivrak 2023
             </footer>
           </div>
-        </Providers>
         <Analytics />
       </body>
     </html>
