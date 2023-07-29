@@ -29,7 +29,7 @@ export default function TechIcons() {
     >
       {TECHS.map((tech) => (
         //@ts-expect-error (for hideArrow prop)
-        <Tooltip content={tech.title} placement="top" key={tech.title} hideArrow>
+        <Tooltip content={tech.title} placement="top" key={tech.title} hidearrow="true">
           <tech.Icon
             key={tech.title}
             className={`text-4xl ${tech.color} hover:text-white transition duration-300 ease-in-out`}
