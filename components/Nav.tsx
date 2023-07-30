@@ -62,7 +62,10 @@ const HamburgerMenu = () => {
         className="px-2 pt-0 pb-0 space-x-8 justify-start bg-transparent border-transparent"
         side="right"
       >
-        <Link href="/" className="text-stone-200 bg-transparent hover:text-stone-600">
+        <Link
+          href="/"
+          className="text-stone-200 bg-transparent hover:text-stone-600"
+        >
           home
         </Link>
 
