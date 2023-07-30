@@ -1,44 +1,63 @@
-import TechStack from "@/components/TechStack";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
+import { TbMailFilled } from "react-icons/tb";
+import Footer from "@/components/Footer";
+import Link from "next/link";
 
 export default function App() {
   return (
     <div>
-      <div className="my-10">
-        <h1 className="text-5xl font-thin my-0.5">
+      <div className="my-10 text-2xl font-thin ">
+        <h1 className="text-5xl font-thin my-0.5 text-white tracking-widest">
           huse kivrak
         </h1>
-        <h2 className="font-thin">software engineer</h2>
-        <div className="flex space-x-4 mt-2 text-3xl">
+        <h2 className="font-thin tracking-widest text-white mb-2">
+          software engineer
+        </h2>
+        <div className="flex space-x-12 text-3xl">
           <a href="https://github.com/husekivrak" target="_blank">
-            <SiGithub className=" text-black" />
+            <SiGithub className=" text-white hover:text-black" />
           </a>
           <a href="https://www.linkedin.com/in/husekivrak/" target="_blank">
-            <FaLinkedin className=" text-blue-500" />
+            <FaLinkedin className="text-white hover:text-blue-500" />
           </a>
+          <a
+            href="mailto:huse@husekivrak.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-stone-100/80 "
+          >
+            <TbMailFilled className="text-white hover:text-rose-300" />
+          </a>
+        </div>
+        <div className="text-3xl tracking-normal mt-16 text-stone-50">
+          <p className="mt-6">
+            I'm a career changer who followed his passions.
+          </p>
+
+          <Link
+            href="/about"
+            className="font-light text-2xl text-stone-200/80 hover:text-white"
+          >
+            learn more
+          </Link>
+        </div>
+
+        <div className="mt-10">
+          <h3 className="text-3xl font-thin tracking-widest">
+            don't read enough blogs?
+          </h3>
+          <p className="font-thin text-xl mb-2">add mine to the pile!</p>
+          <Link
+            href="/blog"
+            className="font-light text-2xl text-stone-200/80 hover:text-white"
+          >
+            read more
+          </Link>
         </div>
       </div>
 
-      <section id="about">
-        <h2>about</h2>
-        <section className="font-thin mb-5 text-xl tracking-widest leading-loose">
-          Esse sunt nulla aute labore labore qui laborum ad laboris ipsum.
-          Incididunt do cillum proident aliquip elit proident do mollit
-          voluptate amet. Incididunt amet labore officia cupidatat id nostrud
-          aliquip consequat elit adipisicing proident reprehenderit in
-          reprehenderit. Irure cillum Lorem mollit aliquip minim ut aliquip
-          aliquip laboris mollit amet nulla sunt aliquip. Pariatur eiusmod irure
-          adipisicing esse. Nisi voluptate eu ea laborum sit irure.
-        </section>
-        <div id="tech" className="my-2">
-          <h4 className=" text-3xl font-extralight tracking-widest">tech</h4>
-        </div>
-      </section>
-      <TechStack />
-      <footer className=" fixed inset-x-0 bottom-0 p-4 text-center font-light ">
-        <p className="text-white text-xl">©2023 huse kivrak</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

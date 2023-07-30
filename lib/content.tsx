@@ -3,8 +3,8 @@ import { Project } from "./types";
 /** NAV LINKS */
 export const NAV_LINKS = [
   {
-    name: "home",
-    url: "/",
+    name: "about",
+    url: "/about",
   },
 
   {
@@ -14,6 +14,10 @@ export const NAV_LINKS = [
   {
     name: "blog",
     url: "/blog",
+  },
+  {
+    name: "contact",
+    url: "/contact",
   },
 ];
 
@@ -43,9 +47,3 @@ export const PROJECTS: Project[] = [
     tags: ["React Native", "TypeScript"],
   },
 ];
-
-
-
-
-
-
