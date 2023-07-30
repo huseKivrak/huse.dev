@@ -21,17 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={jose.className}>
-      <body>
-          <div className="relative flex flex-col h-screen">
-            <Nav />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-              {children}
-            </main>
-            <footer className="text-stone-300 font-extralight w-full flex items-center justify-center py-3">
-              &copy; huse kivrak 2023
-            </footer>
-          </div>
-        <Analytics />
+      <body className="antialiased max-w-2xl mb-40 flex flex-col md:flex-row mx-4 mt-8 lg:mx-auto">
+        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
+          <Nav />
+          {children}
+          <Analytics />
+        </main>
       </body>
     </html>
   );

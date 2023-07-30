@@ -73,6 +73,10 @@
     @apply border-border;
   }
   body {
-    @apply bg-stone-800 text-stone-100 tracking-wider;
+    @apply bg-stone-800/95 text-stone-200 tracking-widest;
+  }
+
+  h2 {
+    @apply text-3xl font-extralight;
   }
 }

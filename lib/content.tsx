@@ -1,17 +1,19 @@
-import { Project, Tech } from "./types";
-
-//* Next.js tree shaking?
-import * as Icons from "react-icons/si";
+import { Project } from "./types";
 
 /** NAV LINKS */
 export const NAV_LINKS = [
   {
-    name: "about",
-    url: "#about",
+    name: "home",
+    url: "/",
   },
+
   {
     name: "projects",
-    url: "#projects",
+    url: "/projects",
+  },
+  {
+    name: "blog",
+    url: "/blog",
   },
 ];
 
@@ -41,6 +43,8 @@ export const PROJECTS: Project[] = [
     tags: ["React Native", "TypeScript"],
   },
 ];
+
+
 
 
 
