@@ -32,12 +32,12 @@ export default function App() {
         </div>
         <div className="text-3xl tracking-normal mt-16 text-stone-50">
           <p className="mt-6">
-            I'm a career changer who followed his passions.
+            I&apos;m a career changer who followed his passions.
           </p>
 
           <Link
             href="/about"
-            className="font-light text-2xl text-stone-200/80 hover:text-white"
+            className="font-normal text-2xl text-stone-200/80 hover:text-white"
           >
             learn more
           </Link>
@@ -45,14 +45,13 @@ export default function App() {
 
         <div className="mt-10">
           <h3 className="text-3xl font-thin tracking-widest">
-            don't read enough blogs?
+            ...don&apos;t read enough blogs?
           </h3>
-          <p className="font-thin text-xl mb-2">add mine to the pile!</p>
           <Link
             href="/blog"
-            className="font-light text-2xl text-stone-200/80 hover:text-white"
+            className="font-normal text-2xl text-stone-200/80 hover:text-white"
           >
-            read more
+            add mine to the pile
           </Link>
         </div>
       </div>
