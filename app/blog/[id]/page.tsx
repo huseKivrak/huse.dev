@@ -12,11 +12,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Post({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+export default async function Post(props: {id: string}){
+  const {id} = props
   const { data } = await supabase.from("posts").select().match({ id }).single();
 
   if (!data) {
