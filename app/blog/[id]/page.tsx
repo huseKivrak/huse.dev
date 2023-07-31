@@ -1,6 +1,6 @@
 import supabase from "@/lib/supabase";
 import { notFound } from "next/navigation";
-import { Post } from "@/lib/types";
+
 
 export const revalidate = 60
 
@@ -13,13 +13,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Post({ params: { id } }: { params: { id: string } }) {
+export default async function Post({postId}:any) {
 
-  const { data } = await supabase.from("posts").select().match({ id }).single();
+  const { data:post } = await supabase.from("posts").select().match({ postId }).single();
 
-  if (!data) {
+  if (!post) {
     notFound();
   }
 
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+  return <pre>{JSON.stringify(post, null, 2)}</pre>;
 }
