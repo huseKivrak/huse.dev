@@ -11,6 +11,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
+  DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
@@ -59,24 +60,28 @@ const HamburgerMenu = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="px-2 pt-0 pb-0 space-x-8 justify-start bg-transparent border-transparent"
+        className="space-x-2 justify-start bg-transparent border-transparent inline-flex"
         side="right"
       >
-        <Link
-          href="/"
-          className="text-stone-200 bg-transparent hover:text-stone-600"
-        >
-          home
-        </Link>
+        <DropdownMenuItem asChild>
+          <Link
+            href="/"
+            className="text-stone-200 bg-transparent hover:text-stone-600"
+          >
+            home
+          </Link>
+        </DropdownMenuItem>
 
         {NAV_LINKS.map((link, index) => (
-          <Link
-            key={index}
-            href={link.url}
-            className=" text-stone-200 bg-transparent hover:text-stone-600 "
-          >
-            {link.name}
-          </Link>
+          <DropdownMenuItem asChild>
+            <Link
+              key={index}
+              href={link.url}
+              className=" text-stone-200 bg-transparent hover:text-stone-600 "
+            >
+              {link.name}
+            </Link>
+          </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
