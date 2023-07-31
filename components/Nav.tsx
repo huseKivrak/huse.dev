@@ -21,7 +21,7 @@ export default function Nav() {
     <div className="bg-transparent p-0 font-light tracking-widest max-w-xl sticky ">
       <NavigationMenu>
         <NavigationMenuList className="md:flex hidden justify-start">
-          <NavigationMenuItem className="mr-4 ml-1 font-normal">
+          <NavigationMenuItem className="mr-4 font-normal">
             <Link className="hover:text-stone-500" href="/">
               home
             </Link>
