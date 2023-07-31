@@ -1,3 +1,5 @@
+'use client';
+
 import TechStack from "@/components/TechStack";
 export default function About(): JSX.Element {
   return (
