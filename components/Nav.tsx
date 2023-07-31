@@ -18,15 +18,15 @@ import Link from "next/link";
 import { SlMenu } from "react-icons/sl";
 export default function Nav() {
   return (
-    <div className="bg-transparent font-light tracking-widest max-w-xl sticky">
+    <div className="bg-transparent p-0 font-light tracking-widest max-w-xl sticky ">
       <NavigationMenu>
         <NavigationMenuList className="md:flex hidden justify-start">
-          <NavigationMenuItem className="mr-4 font-normal">
+          <NavigationMenuItem className="mr-4 ml-1 font-normal">
             <Link className="hover:text-stone-500" href="/">
               home
             </Link>
           </NavigationMenuItem>
-          <div className="gap-4 hidden sm:flex">
+          <div className="gap-4 hidden md:flex">
             {NAV_LINKS.map((link, index) => (
               <NavigationMenuItem key={index} className="mx-4">
                 <Link
@@ -51,7 +51,7 @@ const HamburgerMenu = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="md:hidden p-0 inline-flex items-center rounded-md bg-transparent hover:text-stone-100 hover:bg-stone-700"
+          className="md:hidden p-0 -ml-3 inline-flex items-center rounded-md bg-transparent hover:text-stone-100 hover:bg-stone-700"
           variant="default"
           size="icon"
         >
@@ -60,7 +60,7 @@ const HamburgerMenu = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="space-x-2 justify-start bg-transparent border-transparent inline-flex"
+        className="space-x-0 justify-start bg-transparent border-transparent inline-flex"
         side="right"
       >
         <DropdownMenuItem key={"home-link"} asChild>
