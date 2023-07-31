@@ -12,3 +12,13 @@ export type Tech = {
     Icon: React.ComponentType<React.HTMLAttributes<HTMLElement>>
     color: string,
 }
+
+export type Post = {
+    id: string,
+    created_at: string,
+    name: string,
+    content: string,
+    tags: string[],
+    is_published: boolean,
+    published_on: string,
+}
