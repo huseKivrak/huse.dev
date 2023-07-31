@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={jose.className}>
       <body className="antialiased max-w-xl mb-35 flex flex-col md:flex-row mx-4 mt-2 lg:mx-auto">
-        <main className="flex-auto min-w-0 mt-4 flex flex-col px-2 md:px-0">
+        <main className="flex-auto min-w-0 mt-14 flex flex-col px-2 md:px-0">
           <Nav />
           {children}
           <Analytics />

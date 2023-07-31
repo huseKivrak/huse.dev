@@ -73,7 +73,11 @@
     @apply border-border;
   }
   body {
-    @apply bg-stone-800 text-stone-100 tracking-widest;
+    @apply bg-stone-800 text-stone-100;
+  }
+
+  h1 {
+    @apply text-5xl font-thin text-white tracking-widest mt-8;
   }
 
   h2 {
