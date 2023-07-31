@@ -22,7 +22,7 @@ export const NAV_LINKS = [
 ];
 
 /** PROJECTS */
-export const PROJECTS: Project[] = [
+export const PROJECT_LIST: Project[] = [
   {
     title: "Jobly",
     description: "a full stack job search web application",

@@ -1,4 +1,6 @@
-import { PROJECTS } from "@/lib/content";
+"use client";
+
+import { PROJECT_LIST } from "@/lib/content";
 import { AiOutlineGithub } from "react-icons/ai";
 import { FiExternalLink } from "react-icons/fi";
 import Link from "next/link";
@@ -7,12 +9,11 @@ import { Separator } from "@/components/ui/separator";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function Projects(): JSX.Element {
-  //
   return (
     <div className="container mt-10 px-0 mx-auto">
       <h2 className="text-4xl font-extralight mb-4">projects</h2>
 
-      {PROJECTS.map((project, index) => (
+      {PROJECT_LIST.map((project, index) => (
         <div
           key={`${project.title}-${index}`}
           className="bg-transparent mb-10 p-4 border rounded-lg border-stone-100"
