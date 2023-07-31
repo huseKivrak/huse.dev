@@ -12,7 +12,6 @@ import {
   DropdownMenuTrigger,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
 import { SlMenu } from "react-icons/sl";
@@ -50,14 +49,13 @@ const HamburgerMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
+        <button
           className="md:hidden p-0 -ml-3 inline-flex items-center rounded-md bg-transparent hover:text-stone-100 hover:bg-stone-700"
-          variant="default"
-          size="icon"
+          aria-label="Open menu"
         >
           <SlMenu />
           <span className="sr-only">Open menu</span>
-        </Button>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="space-x-0 justify-start bg-transparent border-transparent inline-flex"
