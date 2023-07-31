@@ -1,5 +1,4 @@
 "use client";
-
 import { NAV_LINKS } from "@/lib/content";
 import {
   NavigationMenu,
@@ -57,13 +56,14 @@ const HamburgerMenu = () => {
           size="icon"
         >
           <SlMenu />
+          <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="space-x-2 justify-start bg-transparent border-transparent inline-flex"
         side="right"
       >
-        <DropdownMenuItem asChild>
+        <DropdownMenuItem key={"home-link"} asChild>
           <Link
             href="/"
             className="text-stone-200 bg-transparent hover:text-stone-600"
@@ -73,9 +73,8 @@ const HamburgerMenu = () => {
         </DropdownMenuItem>
 
         {NAV_LINKS.map((link, index) => (
-          <DropdownMenuItem asChild>
+          <DropdownMenuItem key={`${link.name}-${index}`} asChild>
             <Link
-              key={index}
               href={link.url}
               className=" text-stone-200 bg-transparent hover:text-stone-600 "
             >
