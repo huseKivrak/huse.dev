@@ -34,7 +34,7 @@ export const PROJECTS: Project[] = [
   {
     title: "Warbler",
     image: "/images/projects/warbler.png",
-    description: "a social media app",
+    description: "a social media application",
     url: "https://warbler-huse.onrender.com",
     github: "https://github.com/husekivrak/warbler",
     tags: ["Flask", "PostgreSQL", "SQLAlchemy"],
@@ -42,7 +42,7 @@ export const PROJECTS: Project[] = [
   {
     title: "RithmGo",
     image: "/images/projects/rithmgo.jpg",
-    description: "a mobile app for students",
+    description: "a mobile application for students",
     github: "https://github.com/husekivrak/rithmgo",
     tags: ["React Native", "TypeScript"],
   },
