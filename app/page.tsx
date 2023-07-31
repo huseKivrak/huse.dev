@@ -7,8 +7,8 @@ import Link from "next/link";
 export default function App() {
   return (
     <div>
-      <div className="my-10 text-2xl font-thin ">
-        <h1 className="text-5xl font-thin my-0.5 text-white tracking-widest">
+      <div className="mb-10 text-2xl font-thin ">
+        <h1 className="mb-0.5">
           huse kivrak
         </h1>
         <h2 className="font-thin tracking-widest text-white mb-2">

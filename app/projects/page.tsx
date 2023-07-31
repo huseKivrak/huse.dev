@@ -10,13 +10,13 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function Projects(): JSX.Element {
   return (
-    <div className="container mt-10 px-0 mx-auto">
-      <h2 className="text-4xl font-extralight mb-4">projects</h2>
+    <div className="">
+      <h1 className="mb-8">projects</h1>
 
       {PROJECT_LIST.map((project, index) => (
         <div
           key={`${project.title}-${index}`}
-          className="bg-transparent mb-10 p-4 border rounded-lg border-stone-100"
+          className="bg-transparent hover:bg-stone-900 mb-10 p-4 border rounded-lg border-stone-500 hover:border-stone-100"
         >
           <div className="space-y-4 lg:grid lg:grid-cols-3 lg:items-start lg:gap-6 lg:space-y-4">
             <AspectRatio ratio={19 / 16}>
@@ -33,11 +33,11 @@ export default function Projects(): JSX.Element {
                 <h4 className="text-lg leading-6 font-semibold font-sans text-skin-inverted group-hover:text-skin-primary">
                   {project.title}
                   <Link href={project.github} target="_blank">
-                    <AiOutlineGithub className="inline-block ml-2 text-xl" />
+                    <AiOutlineGithub className="inline-block ml-2 text-xl hover:text-black" />
                   </Link>
                   {project.url && (
                     <Link href={project.url} target="_blank">
-                      <FiExternalLink className="inline-block ml-2 text-xl" />
+                      <FiExternalLink className="inline-block ml-2 text-xl hover:text-rose-300" />
                     </Link>
                   )}
                 </h4>
