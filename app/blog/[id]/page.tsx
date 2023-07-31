@@ -13,9 +13,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Post(props: Post["id"]){
+export default async function Post({ params: { id } }: { params: { id: string } }) {
 
-  const { data } = await supabase.from("posts").select().match({ props }).single();
+  const { data } = await supabase.from("posts").select().match({ id }).single();
 
   if (!data) {
     notFound();
