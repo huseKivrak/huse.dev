@@ -3,65 +3,65 @@ import { AiOutlineGithub } from "react-icons/ai";
 import { FiExternalLink } from "react-icons/fi";
 import Link from "next/link";
 import Image from "next/image";
-
 import { Separator } from "@/components/ui/separator";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function Projects(): JSX.Element {
+  //
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 font-light">
-      <h2 className=" text-4xl font-extralight tracking-widest col-span-full">
-        projects
-      </h2>
+    <div className="container mt-10 px-0 mx-auto">
+      <h2 className="text-4xl font-extralight mb-4">projects</h2>
+
       {PROJECTS.map((project, index) => (
         <div
-          className=" bg-transparent border border-stone-300 text-stone-200 hover:text-white mx-auto px-5 "
           key={`${project.title}-${index}`}
-          tabIndex={0}
+          className="bg-transparent mb-10 p-4 border rounded-lg border-stone-100"
         >
-          <div className="flex items-start space-x-4 my-2 tracking-widest font-light text-lg">
-            <p className="ml-2">{project.title}</p>
+          <div className="space-y-4 lg:grid lg:grid-cols-3 lg:items-start lg:gap-6 lg:space-y-4">
+            <AspectRatio ratio={19 / 16}>
+              <Image
+                className="object-cover shadow-lg rounded-lg group-hover:opacity-75"
+                src={project.image}
+                alt={project.title}
+                fill
+              />
+            </AspectRatio>
 
-            <Link
-              href={project.github}
-              aria-label={`GitHub link for ${project.title}`}
-            >
-              <AiOutlineGithub />
-            </Link>
+            <div className="sm:col-span-2">
+              <div className="mt-2">
+                <h4 className="text-lg leading-6 font-semibold font-sans text-skin-inverted group-hover:text-skin-primary">
+                  {project.title}
+                  <Link href={project.github} target="_blank">
+                    <AiOutlineGithub className="inline-block ml-2 text-xl" />
+                  </Link>
+                  {project.url && (
+                    <Link href={project.url} target="_blank">
+                      <FiExternalLink className="inline-block ml-2 text-xl" />
+                    </Link>
+                  )}
+                </h4>
 
-            {project.url && (
-              <Link
-                href={project.url}
-                aria-label={`External link for ${project.title}`}
-              >
-                <FiExternalLink />
-              </Link>
-            )}
+                <p className="mt-1 text-sm font-normal text-skin-base leading-5">
+                  {project.description}
+                </p>
+                <Separator className="mb-4" />
               </div>
-            <div className="space-x-4 ml-2 my-1">
-              {project.tags.map((tag, index) => {
-                return (
-                  <span key={index} className="">
-                    {tag}
-                  </span>
-                );
-              })}
+              <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2">
+                  {project.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center leading-none px-1 py-1 text-xs font-medium text-stone-200 bg-stone-700 rounded-sm border border-stone-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
-          <Separator />
-
-          <div className="text-sm">
-            {project.description}
-
-            <Image
-              src={project.image}
-              alt={project.title}
-              width={400}
-              height={200}
-              className="mt-2"
-            />
-            <Separator />
           </div>
         </div>
       ))}
-    </section>
+    </div>
   );
 }
