@@ -1,29 +1,27 @@
+import supabase from "@/lib/supabase";
+import { notFound } from "next/navigation";
+
+export const revalidate = 60
 
 
-import supabase from "../../../lib/supabase";
-import Link from "next/link";
-async function getPost(postId: string) {
-  const { data, error } = await supabase
-    .from("posts")
-    .select()
-    .eq("id", postId)
-    .single();
-  if (error) throw error;
-  return data;
+export async function generateStaticProps() {
+  const { data: posts } = await supabase.from("posts").select("id");
+
+  return posts?.map(({ id }) => ({
+    id,
+  }));
 }
 
-export default async function PostPage({ params }: any) {
-  const post = await getPost(params.id);
+export default async function Post({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  const { data } = await supabase.from("posts").select().match({ id }).single();
 
-  return (
-    <div className="">
-      <Link href="/blog">
-        <span className="font-extralight text-rose-50">back</span>
-        </Link>
-      <h1 className="">
-        #{post.id}: {post.name}
-      </h1>
-      <p>{post.content}</p>
-    </div>
-  );
+  if (!data) {
+    notFound();
+  }
+
+  return <pre>{JSON.stringify(data, null, 2)}</pre>;
 }
