@@ -1,5 +1,3 @@
-"use client";
-
 //todo: check next.js tree shaking
 import * as Icons from "react-icons/si";
 import { Tech } from "@/lib/types";
