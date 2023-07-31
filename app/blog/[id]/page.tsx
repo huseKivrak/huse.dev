@@ -13,13 +13,12 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Post({postId}:any) {
-
-  const { data:post } = await supabase.from("posts").select().match({ postId }).single();
+export default async function Post({ params: { id } }: { params: { id: string } }) {
+  const { data: post } = await supabase.from('posts').select().match({ id }).single()
 
   if (!post) {
-    notFound();
+    notFound()
   }
 
-  return <pre>{JSON.stringify(post, null, 2)}</pre>;
+  return <pre>{JSON.stringify(post, null, 2)}</pre>
 }
