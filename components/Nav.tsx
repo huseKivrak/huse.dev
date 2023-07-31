@@ -41,7 +41,7 @@ export default function Nav() {
               <NavigationMenuItem key={index} className="mx-4">
                 <Link
                   className={clsx(
-                    "hover:text-stone-500",
+                    "hover:text-stone-500 text-stone-100 font-light",
                     pathname === link.url && "text-white font-normal"
                   )}
                   href={link.url}
