@@ -73,10 +73,11 @@ const HamburgerMenu = () => {
         </DropdownMenuItem>
 
         {NAV_LINKS.map((link, index) => (
-          <DropdownMenuItem key={`${link.name}-${index}`} asChild>
+          <DropdownMenuItem key={`${link.name}-${index}-${link.name}`} asChild>
             <Link
               href={link.url}
               className=" text-stone-200 bg-transparent hover:text-stone-600 "
+              key={`${link.name}-${index}`}
             >
               {link.name}
             </Link>
