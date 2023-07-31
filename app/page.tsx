@@ -15,20 +15,20 @@ export default function App() {
           software engineer
         </h2>
         <div className="flex space-x-12 text-3xl">
-          <a href="https://github.com/husekivrak" target="_blank">
+          <Link href="https://github.com/husekivrak" target="_blank">
             <SiGithub className=" text-white hover:text-black" />
-          </a>
-          <a href="https://www.linkedin.com/in/husekivrak/" target="_blank">
+          </Link>
+          <Link href="https://www.linkedin.com/in/husekivrak/" target="_blank">
             <FaLinkedin className="text-white hover:text-blue-500" />
-          </a>
-          <a
+          </Link>
+          <Link
             href="mailto:huse@husekivrak.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-stone-100/80 "
           >
             <TbMailFilled className="text-white hover:text-rose-300" />
-          </a>
+          </Link>
         </div>
         <div className="text-3xl tracking-normal mt-16 text-stone-50">
           <p className="mt-6">
