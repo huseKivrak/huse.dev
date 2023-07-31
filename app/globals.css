@@ -71,9 +71,11 @@
 @layer base {
   * {
     @apply border-border;
+
   }
   body {
-    @apply bg-stone-800 text-stone-100;
+    /* @apply bg-gradient-to-t from-stone-800 via-stone-800/95 to-stone-800/90 to-80% text-stone-100; */
+    @apply bg-stone-800/95 text-stone-100;
   }
 
   h1 {

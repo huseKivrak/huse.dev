@@ -1,3 +1,5 @@
+
+
 import supabase from "../../../lib/supabase";
 import Link from "next/link";
 async function getPost(postId: string) {
