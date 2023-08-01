@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import { NAV_LINKS } from "@/lib/content";
 import {
   NavigationMenu,

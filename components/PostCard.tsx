@@ -4,17 +4,18 @@ import Link from "next/link";
 
 export default function PostCard(post: Post) {
   return (
-    <div className="mb-8">
-      <h2 className="mb-1 text-xl">
+    <div className="mb-12">
+      <h2 >
         <Link
           href={post.url}
-          className="text-blue-700 hover:text-blue-900 dark:text-blue-400"
+          className="text-stone-200 hover:text-white"
         >
           {post.title}
         </Link>
       </h2>
-      <time dateTime={post.date} className="mb-2 block text-xs text-gray-600">
-        {new Intl.DateTimeFormat("en-US").format(new Date(post.date))}
+      <p className='text-stone-100 font-light mb-1'>{post.description}</p>
+      <time dateTime={post.date} className="mb-2 block text-xs font-light text-stone-200">
+      {new Date(post.date).toLocaleDateString("en-US")}
       </time>
     </div>
   );
