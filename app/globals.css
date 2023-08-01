@@ -75,7 +75,7 @@
   }
   body {
     /* @apply bg-gradient-to-t from-stone-800 via-stone-800/95 to-stone-800/90 to-80% text-stone-100; */
-    @apply bg-stone-800/95 text-stone-100;
+    @apply bg-stone-800/95 text-stone-100 tracking-widest;
   }
 
   h1 {
@@ -84,5 +84,9 @@
 
   h2 {
     @apply text-3xl font-extralight;
+  }
+
+  h3 {
+    @apply text-2xl font-extralight;
   }
 }
