@@ -1,4 +1,3 @@
-"use client";
 
 import { PROJECT_LIST } from "@/lib/content";
 import { AiOutlineGithub } from "react-icons/ai";
