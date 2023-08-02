@@ -26,7 +26,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
   const MDXContent = useMDXComponent(post.body.code);
 
   return (
-    <article className='mx-auto max-w-xl'>
+    <article className=''>
       <h1>{post.title}</h1>
       <p className='font-thin text-stone-100 text-xl'>{post.description}</p>
       <time dateTime={post.date} className='mb-1 text-xs font-light text-stone-200'>
