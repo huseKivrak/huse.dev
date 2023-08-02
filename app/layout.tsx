@@ -12,7 +12,7 @@ const jose = Josefin_Sans({
 
 export const metadata: Metadata = {
   title: 'huse kivrak',
-  description: 'Portfolio of Huse Kivrak',
+  description: "Huse Kivrak's personal website",
 };
 
 export default function RootLayout({
