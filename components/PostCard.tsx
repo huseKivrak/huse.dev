@@ -8,7 +8,7 @@ export default function PostCard(post: Post) {
       <h2 >
         <Link
           href={post.url}
-          className="text-stone-200 hover:text-white"
+          className="text-white hover:text-stone-400"
         >
           {post.title}
         </Link>
