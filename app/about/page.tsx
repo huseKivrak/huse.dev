@@ -91,7 +91,7 @@ export default function About(): JSX.Element {
           >
             letter correspondence service
           </Link>{' '}
-          with Django that is definitely <i>not</i> "just email but worse".
+          with Django that is definitely <i>not</i> &quot;just email but worse&quot;.
         </p>
 
         <p className='mt-3'>
