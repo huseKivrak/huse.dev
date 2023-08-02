@@ -61,28 +61,21 @@ export default function About(): JSX.Element {
         /> */}
 
         <Separator />
-        <p className='mt-4'>
+        <p className='mt-1'>
           Full-stack developer based in New York City.
           <br />
-          Formerly director of education at{' '}
-          <Link
-            href='https://www.smli.org/'
-            className='font-light text-white underline decoration-0 underline-offset-2 hover:text-stone-500'
-            target='_blank'
-          >
-            SMLI
-          </Link>
-          .
-        </p>
-        <p className='mt-6'>
-          I'm a 'late-blooming' software engineer who is fascinated by the
-          versatility of programming, and how novel tools can yield new and
-          improved solutions. Currently, I'm expanding my proficiency in{' '}
-          <span className='font-light'>Next.js </span>
-          and <span className='font-light'>Django</span>, as well as other
-          frameworks that facilitate scalable, performant applications.
         </p>
         <p className='mt-4'>
+          I&apos;m a &apos;late-blooming&apos; software engineer, fascinated by
+          the versatility of programming. I love creating robust, intuitive
+          tools that empower & delight users, and enjoy delving deeper into the
+          principles & paradigms that underlie good code. Currently I&apos;m
+          honing my skills in <span className='font-light'>Next.js </span>
+          and <span className='font-light'>Django</span>, as well as other
+          frameworks & technologies that facilitate scalable, performant
+          development.
+        </p>
+        <p className='mt-3'>
           I also love offbeat, creative coding. I built a{' '}
           <Link
             href='/blog/chatHuh'
@@ -96,24 +89,35 @@ export default function About(): JSX.Element {
             className='font-light text-white underline decoration-0 underline-offset-2 hover:text-stone-400'
             target='_blank'
           >
-            letter correspondence application
+            letter correspondence service
           </Link>{' '}
-          with Django that is definitely <i>not</i> just a "worse version of
-          email".
+          with Django that is definitely <i>not</i> "just email but worse".
         </p>
 
-        <p className='mt-4'>
+        <p className='mt-3'>
           I transitioned to software engineering after six years in non-profit
-          science education, bringing my love of collaborative problem solving
-          with me.
+          science education, bringing my love for collaboration & problem
+          solving - plus my inner child - with me. I attended{' '}
+          <Link
+            href='https://rithmschool.com'
+            className='font-light text-white underline decoration-0 underline-offset-2 hover:text-stone-400'
+            target='_blank'
+          >
+            Rithm School
+          </Link>
+          , a 16-week full-stack bootcamp that instilled the values & practices
+          essential to professional software development.
         </p>
 
+        <p className='mt-2'>
+          I&apos;m open to new opportunities and would love to hear from you!
+        </p>
         <p className='flex'>
-          You can download my resume
+          You can download my resume&nbsp;
           <Link
             href='/pdfs/huseKivrakResume.pdf'
-            className='font-light text-white ml-2 underline decoration-0 underline-offset-2 hover:text-stone-400'
-            download
+            target='_blank'
+            className='font-light text-white underline decoration-0 underline-offset-2 hover:text-stone-400'
           >
             here
           </Link>
