@@ -46,4 +46,11 @@ export const PROJECT_LIST: Project[] = [
     github: "https://github.com/husekivrak/rithmgo",
     tags: ["React Native", "TypeScript"],
   },
+  {
+    title: "Personal Website",
+    image: "/images/projects/website.png",
+    description: "my personal website",
+    github: "https://github.com/husekivrak/huse.dev",
+    tags: ["Next.js", "TypeScript", "Vercel", "Tailwind CSS"],
+  }
 ];
