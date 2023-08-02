@@ -15,22 +15,14 @@ export const NAV_LINKS = [
     name: "blog",
     url: "/blog",
   },
-  {
-    name: "contact",
-    url: "/contact",
-  },
+  // {
+  //   name: "contact",
+  //   url: "/contact",
+  // },
 ];
 
 /** PROJECTS */
 export const PROJECT_LIST: Project[] = [
-  {
-    title: "Jobly",
-    description: "a full stack job search web application",
-    image: "/images/projects/jobly.png",
-    url: "https://jobly.huse.dev",
-    github: "https://github.com/husekivrak/jobly",
-    tags: ["Express.js", "React", "PostgreSQL"],
-  },
   {
     title: "Warbler",
     image: "/images/projects/warbler.png",
@@ -38,6 +30,14 @@ export const PROJECT_LIST: Project[] = [
     url: "https://warbler-huse.onrender.com",
     github: "https://github.com/husekivrak/warbler",
     tags: ["Flask", "PostgreSQL", "SQLAlchemy"],
+  },
+  {
+    title: "Jobly",
+    description: "a job search web application",
+    image: "/images/projects/jobly.png",
+    url: "https://jobly.huse.dev",
+    github: "https://github.com/husekivrak/jobly",
+    tags: ["Express.js", "React", "PostgreSQL"],
   },
   {
     title: "RithmGo",
