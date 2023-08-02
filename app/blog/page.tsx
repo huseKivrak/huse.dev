@@ -1,4 +1,3 @@
-'use client';
 import { compareDesc } from 'date-fns'
 import { allPosts } from 'contentlayer/generated'
 import PostCard from '@/components/PostCard'

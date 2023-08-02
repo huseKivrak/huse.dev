@@ -1,5 +1,3 @@
-'use client';
-
 import TechStack from '@/components/TechStack';
 import Link from 'next/link';
 import Image from 'next/image';
