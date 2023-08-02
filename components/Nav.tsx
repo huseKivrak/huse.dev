@@ -18,7 +18,7 @@ import Link from "next/link";
 import { SlMenu } from "react-icons/sl";
 export default function Nav() {
   return (
-    <div className="bg-transparent p-0 font-light tracking-widest max-w-xl sticky ">
+    <div className="bg-transparent p-0 font-light tracking-widest max-w-xl lg:sticky ">
       <NavigationMenu>
         <NavigationMenuList className="md:flex hidden justify-start">
           <NavigationMenuItem className="mr-4 font-normal">

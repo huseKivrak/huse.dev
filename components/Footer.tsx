@@ -1,9 +1,11 @@
 export default function Footer(): JSX.Element {
   return (
-    <footer className="flex flex-row w-full items-center justify-center h-12">
-      <p className="text-stone-400 font-extralight tracking-widest text-lg">
-        huse kivrak &copy;2023
-      </p>
+    <footer className='text-stone-200 font-thin tracking-widest bottom-0 left-0 right-0'>
+      <div className='container mx-auto max-w-screen-xl my-4 lg:my-6 flex justify-center'>
+        <span className='block text-sm text-center'>
+          &copy;2023 Huse Kivrak
+        </span>
+      </div>
     </footer>
   );
 }
