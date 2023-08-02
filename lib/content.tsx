@@ -47,7 +47,7 @@ export const PROJECT_LIST: Project[] = [
     tags: ["React Native", "TypeScript"],
   },
   {
-    title: "Personal Website",
+    title: "huse.dev",
     image: "/images/projects/website.png",
     description: "my personal website",
     github: "https://github.com/husekivrak/huse.dev",
