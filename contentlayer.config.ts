@@ -4,6 +4,8 @@ import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import path from 'path';
+import { readFileSync } from 'fs';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -25,20 +27,9 @@ export const Post = defineDocumentType(() => ({
       required: true,
       description: 'The brief description of the post',
     },
-    isPublished: {
-      type: 'boolean',
-      required: true,
-      description: 'If post is published on site',
-      default: false,
-    },
-    datePublished: {
-      type: 'date',
-      required: false,
-      description: 'The date post was published',
-    },
     tags: {
       type: 'list',
-      of: {type: 'string'},
+      of: { type: 'string' },
       required: false,
       description: 'Tags for the post',
     },
@@ -52,12 +43,19 @@ export const Post = defineDocumentType(() => ({
       type: 'string',
       resolve: (doc) => `/${doc._raw.flattenedPath}`,
     },
+    author: {
+      type: 'string',
+      resolve: () => 'Huse Kivrak',
+    },
   },
 }));
 
 /** @type {import('rehype-pretty-code').Options} */
 const options = {
-  theme: 'dracula-soft',
+  theme: JSON.parse(
+    readFileSync(path.resolve('components/mdx/everforest-dark.json')).toString()
+  ),
+
   onVisitLine(node: any) {
     //prevent lines from collapsing in 'display:grid' layout,
     //and allow lines to be copy/pasted
