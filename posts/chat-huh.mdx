@@ -1,0 +1,242 @@
+---
+title: 'chat huh: creating a clairvoyant chatbot'
+date: 2023-08-08
+description: combining code and close-up magic
+tags:
+  - TypeIt
+  - magic
+  - AI
+  - chatGPT
+---
+
+## introduction
+
+I've wanted to code magic tricks since printing my first `Hello, World!`.
+If you know any magicians, you're aware of our propensity to make _anything_ into a trick:
+rubber bands, receipts, lip balm, fruit... No object is safe.
+And with programming, I discovered an infinite playground of possibilities.
+
+'chat huh' is my first trick. I built it a few months after starting to code
+(when that 'infinite playground' often felt more 'shoddy jungle gym').
+It's my take on a classic trick: a series of predictions about a participant-shuffled deck of cards.
+Traditionally, the predictions are written on paper;
+here, they're made by an - ostensibly - psychic chatbot.
+
+There weren't any templates or tutorials for "clairvoyant chatbot" (I checked),
+and in developing 'chat huh' I encountered some interesting problems.
+I had a blast throughout the process, cementing my love of programming.
+This post is an overview of its development, and I hope reading it
+inspires you to build something silly, too.
+
+I recommend reading through first, but if you'd like to see 'chat huh' in action you can
+[watch a demo](https://youtu.be/eZv5wb56MB0) of the version I performed while attending Rithm School.
+
+<br />
+But first, a quick look at TypeIt: a fun utility at the heart of 'chat huh'.
+
+## TypeIt
+
+TypeIt is a JavaScript typewriter utility by [Alex MacArthur](https://www.macarthur.me/).
+It's easy to use, incredibly flexible, and just plain fun.
+You can even [build custom animations without writing any code](https://www.typeitjs.com/build-your-own/).
+How cool is that?
+
+The [documentation](https://www.typeitjs.com/docs/vanilla/usage/) is fantastic. I'll just give a quick overview.
+
+Each animation is a TypeIt instance with two arguments:
+
+- **element**: where the text will be typed (use DOM or CSS selectors)
+- **options** object: the instance behavior (string(s) typed, speed, etc.)
+
+Assign it to a variable, and you have a ready-to-go animation,
+triggerable anywhere in your code using the `.go()` method:
+
+```js
+const HAL = new TypeIt('#podBayDoors', {
+  strings: "I'm sorry, Dave. I'm afraid I can't do that.",
+  speed: 20,
+});
+HAL.go(); //chilling typewriting ensues
+```
+
+But the [instance methods](https://www.typeitjs.com/docs/vanilla/instance-methods/) are where the magic happens - literally, in this case.
+They provide fine-tuned control at every step (and were actually my first exposure to [method chaining](https://en.wikipedia.org/wiki/Method_chaining)).
+
+By adding some well-timed delays and edits, you can suggest a surprising amount of personality.
+
+Here's how I used them to add a little drama and realism:
+
+```js
+const redsReveal = new TypeIt('#output', { speed: 25 })
+  .pause(3000)
+  .type('Of those face-down cards, ')
+  .type('18 are red.', { delay: 3000 })
+  .move(-9, { delay: 1000 })
+  .delete(1, { delay: 1500 })
+  .type('7', { delay: 2500 })
+  .move(null, { to: 'END' });
+```
+
+## chat huh
+
+If you have some coding experience, you likely have a sense of the general idea:
+
+**An event handler calls `.go()` on subsequent `TypeIt`s with each form submission,
+iterating through an array of predictions.**
+
+And initially, yes, 'chat huh' was just a single-input form & a bunch of TypeIts.
+
+But there was still some key functionality missing:
+
+- **interactivity**: to be believable, it'd somehow have to be capable of communicating dynamically, not just recite stock lines.
+  This one was daunting.
+- **reusability**: it should be able to perform multiple tricks;
+  new tricks shouldn't require their own chatbots.
+- **toggling**: finally, if it's interactive & has a repertoire, it'd need a way
+  to select tricks and toggle between 'chatting' & 'performing', discreetly.
+
+Interactivity seemed definitively unachievable.
+I obviously couldn't build an actual language model
+and incorporating AI APIs was not yet on my radar.
+
+The eventual solution was unexpectedly simple. It was the last feature I implemented,
+though, so let's look at the others first.
+
+## `class Trick`
+
+I was learning object-oriented programming at the time,
+and making a `Trick` class ticked a lot of boxes.
+
+Each `Trick` could have a `patter` property (magician-speak for a trick's script),
+which stores its array of `TypeIt`s,
+and `patterShown`,
+a counter variable that also served as an index.
+
+```js
+class Trick {
+  constructor(patter) {
+    this.patter = patter;
+    this.patterShown = 0;
+  }
+
+  perform() {
+    if (this.patterShown < this.patter.length) {
+      const nextLine = this.patter[this.patterShown];
+      nextLine.go();
+      this.patterShown++;
+    }
+  }
+}
+```
+
+<br/>
+And by assigning each trick a "secret code" property, `prompt`, I could discreetly
+select a trick by using the prompt in the form input:
+```js
+const trick = repertoire.find((t) => input.includes(t.prompt));
+if (trick) {
+  return trick.perform();
+}
+```
+
+I wanted prompts to be as inconspicuous as possible & decided to use
+**punctuation marks**: they arose no suspicion and allowed me to chat freely,
+without worrying about word choice.
+
+Finally, a global variable `ACTIVE_TRICK`, to keep track of the selected trick
+& toggle 'performance mode'.
+
+Sprinkle in a little [jQuery](https://jquery.com), and `handleSubmit()` looks something like this:
+
+```js
+let activeTrick = null;
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const input = $('#input').val();
+  $('#input').val('');
+
+  if (!ACTIVE_TRICK) {
+    const trick = repertoire.find((t) => input.includes(t.prompt));
+    if (trick) {
+      ACTIVE_TRICK = trick;
+      return trick.perform();
+    }
+  }
+
+  const totalLines = activeTrick.patter.length;
+
+  if (activeTrick.patterShown < totalLines) {
+    activeTrick.perform();
+  } else if (activeTrick.patterShown === totalLines) {
+    activeTrick = null;
+  }
+}
+```
+
+_note: some code is omitted for clarity_
+
+<br />
+<br />
+Now we just need to figure out how 'chat huh' will communicate.
+
+## the final piece
+
+Embarrassingly, I got the idea from this meme:
+![spongemock](/images/blog/spongememe.png)
+
+Turns out the easiest way to fake communication is by using the laziest kind: mockery.
+
+```js
+function makeMockery(phrase) {
+  //returns PHrAsE
+  const mockery = phrase
+    .split('')
+    .map((char) =>
+      Math.random() < 0.6 ? char.toUpperCase() : char.toLowerCase()
+    )
+    .join('');
+
+  return mockery;
+}
+```
+
+<br/>
+<br/>
+And one more function, to handle inputs & clean up the event handler:
+```js
+function getTrickorMockery(input) {
+  const trick = repertoire.find((t) => input.includes(t.prompt));
+  if (trick) {
+    ACTIVE_TRICK = trick;
+    return trick.perform();
+  }
+
+  const mockery = makeMockery(input);
+
+  new TypeIt('#output', {
+  strings: mockery,
+  speed: 25,
+  }).go();
+}
+
+```
+In other words, unless it's prompted correctly,
+'chat huh' just throws your words back at you - _mockingly_.
+<br/>
+
+## conclusion
+And that's it! Now a sarcastic jerk, 'chat huh' side-stepped
+the interactivity problem and was performance-ready.
+Here's the [demo link](https://youtu.be/eZv5wb56MB0) again
+if you'd like to see it all put together.
+
+Granted, I've explained none of the actual "magic" involved
+(did you really think I would?),
+I hope this behind-the-scenes peek inspires you
+to meld your own passions, encounter fun challenges,
+and find quirky solutions.
+<br/>
+_**Questions? Comments? [Send me an email](mailto:huse@husekivrak.com);
+I'd love to hear from you!**_
+
