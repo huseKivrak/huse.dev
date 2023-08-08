@@ -20,17 +20,26 @@ export default async function App() {
         </h2>
 
         <div className='flex space-x-12 text-3xl ml-1'>
-          <Link href='https://github.com/husekivrak' target='_blank'>
-            <SiGithub className=' text-white hover:bg-stone-600 rounded-full hover:text-black ' />
+          <Link
+            href='https://github.com/husekivrak'
+            target='_blank'
+            aria-label='GitHub Link'
+          >
+            <SiGithub className=' text-white hover:bg-stone-600 rounded-full hover:text-black' />
           </Link>
-          <Link href='https://www.linkedin.com/in/husekivrak/' target='_blank'>
+          <Link
+            href='https://www.linkedin.com/in/husekivrak/'
+            target='_blank'
+            aria-label='LinkedIn Link'
+          >
             <FaLinkedin className='text-white hover:text-blue-500' />
           </Link>
           <Link
             href='mailto:huse@husekivrak.com'
             target='_blank'
             rel='noopener noreferrer'
-            className='text-stone-100/80 '
+            className='text-stone-100/80'
+            aria-label='Email Link'
           >
             <TbMailFilled className='text-white hover:text-rose-300' />
           </Link>
