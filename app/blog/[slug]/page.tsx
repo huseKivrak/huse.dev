@@ -2,9 +2,9 @@ import { format, parseISO } from 'date-fns';
 import { allPosts } from 'contentlayer/generated';
 import { notFound } from 'next/navigation';
 import { useMDXComponent } from 'next-contentlayer/hooks';
-import type { MDXComponents } from 'mdx/types';
+import { mdxComponents } from '@/components/mdx/mdx';
 import { Separator } from '@/components/ui/separator';
-const mdxComponents: MDXComponents = {};
+
 
 export const generateStaticParams = async () =>
   allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
