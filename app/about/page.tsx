@@ -76,7 +76,7 @@ export default function About(): JSX.Element {
         <p className='mt-3'>
           I also love offbeat, creative coding. I built a{' '}
           <Link
-            href='/blog/chatHuh'
+            href='/blog/chat-huh'
             className='font-light text-white underline decoration-0 underline-offset-2 hover:text-stone-400'
           >
             psychic chatbot
