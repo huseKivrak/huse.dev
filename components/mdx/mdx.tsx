@@ -38,7 +38,9 @@ export const mdxComponents: MDXComponents = {
       target='_blank'
     />
   ),
+
   pre: (props) => <pre className='mt-4' {...props} />,
+
   code: (props) => (
     <code className='text-sm text-emerald-400 mt-4' {...props} />
   ),
@@ -53,6 +55,5 @@ export const mdxComponents: MDXComponents = {
   em: (props) => <em className='' {...props} />,
   strong: (props) => <strong className='font-light' {...props} />,
   img: (props) => <img className='mx-auto mt-4' {...props} />,
-//   figcaption: (props) => <figcaption className='text-sm font-thin italic' {...props} />
-
+  //   figcaption: (props) => <figcaption className='text-sm font-thin italic' {...props} />
 };

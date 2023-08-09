@@ -56,6 +56,7 @@ const HAL = new TypeIt('#podBayDoors', {
   strings: "I'm sorry, Dave. I'm afraid I can't do that.",
   speed: 20,
 });
+
 HAL.go(); //chilling typewriting ensues
 ```
 
@@ -129,11 +130,14 @@ class Trick {
 }
 ```
 
-<br/>
+<br />
+
 And by assigning each trick a "secret code" property, `prompt`, I could discreetly
 select a trick by using the prompt in the form input:
+
 ```js
 const trick = repertoire.find((t) => input.includes(t.prompt));
+
 if (trick) {
   return trick.perform();
 }
@@ -190,10 +194,11 @@ Turns out the easiest way to fake communication is by using the laziest kind: mo
 ```js
 function makeMockery(phrase) {
   //returns PHrAsE
-  const mockery = phrase
-    .split('')
+  const mockery = phrase.split('')
     .map((char) =>
-      Math.random() < 0.6 ? char.toUpperCase() : char.toLowerCase()
+      Math.random() < 0.6
+        ? char.toUpperCase()
+        : char.toLowerCase()
     )
     .join('');
 
@@ -204,6 +209,7 @@ function makeMockery(phrase) {
 <br/>
 <br/>
 And one more function, to handle inputs & clean up the event handler:
+
 ```js
 function getTrickorMockery(input) {
   const trick = repertoire.find((t) => input.includes(t.prompt));
@@ -215,9 +221,9 @@ function getTrickorMockery(input) {
   const mockery = makeMockery(input);
 
   new TypeIt('#output', {
-  strings: mockery,
-  speed: 25,
-  }).go();
+    strings: mockery,
+    speed: 25,
+    }).go();
 }
 
 ```
@@ -240,3 +246,4 @@ and find quirky solutions.
 _**Questions? Comments? [Send me an email](mailto:huse@husekivrak.com);
 I'd love to hear from you!**_
 
+```
