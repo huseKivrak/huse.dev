@@ -25,12 +25,12 @@ export default function TechStack() {
   return (
     <div
       id="icons"
-      className=" grid grid-cols-6 gap-y-2 gap-x-5 max-w-fit"
+      className=" grid grid-cols-6 gap-y-6 gap-x-10 max-w-fit"
     >
       {TECHS.map((tech) => (
         <tech.Icon
           key={tech.title}
-          className={`text-2xl ${tech.color} opacity-70 hover:opacity-100`}
+          className={`text-3xl ${tech.color} opacity-70 hover:opacity-100`}
         />
       ))}
     </div>

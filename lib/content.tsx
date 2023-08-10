@@ -2,10 +2,6 @@ import { Project } from "./types";
 
 /** NAV LINKS */
 export const NAV_LINKS = [
-  {
-    name: "about",
-    url: "/about",
-  },
 
   {
     name: "projects",
@@ -15,6 +11,10 @@ export const NAV_LINKS = [
     name: "blog",
     url: "/blog",
   },
+  // {
+  //   name: "about",
+  //   url: "/about",
+  // },
   // {
   //   name: "contact",
   //   url: "/contact",
