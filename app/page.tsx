@@ -19,7 +19,9 @@ export default async function App() {
         <div className='flex justify-between'>
           <div className='flex flex-col'>
             <h1>huse kivrak</h1>
-            <h2 className='font-extralight text-stone-300 ml-1'>software engineer</h2>
+            <h2 className='font-extralight text-stone-300 ml-1'>
+              software engineer
+            </h2>
 
             <div className='flex space-x-16 text-2xl mt-2 ml-1'>
               <Link
@@ -67,21 +69,21 @@ export default async function App() {
             </p>
 
             <p className='mt-4'>
-              I&apos;m passionate about continuous learning and love that tech
-              is an endless opportunity for growth. As a 'late bloomer' I try to
-              learn everything I can, favoring frameworks that
-              foster scalable, performant development.
+              I&apos;m also passionate about continuous learning and love that
+              tech is an endless opportunity for growth. I enjoy exploring all
+              facets of development and favor frameworks that foster scalable,
+              performant applications.
             </p>
-            <p className='font-normal text-lg mt-6 ml-12 text-stone-300'>
+            <p className='font-normal text-lg mt-4 ml-12 text-stone-300'>
               tools & technologies
             </p>
-            <div className='flex flex-col items-start mt-2 ml-12'>
+            <div className='flex flex-col items-start mt-1 ml-12'>
               <TechStack />
             </div>
 
             <p className='mt-12'>
-              I also started a blog; I write about my projects and topics
-              I&apos;m exploring.
+              And I started a blog; I write about my projects and recent topics
+              of interest.{' '}
             </p>
             <p className='font-normal text-lg mt-4 ml-12 text-stone-300'>
               latest blog post:
