@@ -15,7 +15,7 @@ export default async function App() {
 
   return (
     <div>
-      <div className='mb-8'>
+      <div className='mb-2'>
         <div className='flex justify-between'>
           <div className='flex flex-col'>
             <h1>huse kivrak</h1>
@@ -60,46 +60,35 @@ export default async function App() {
         </div>
         <div className='font-light tracking-wider py-4 text-stone-200 mt-2'>
           <Separator />
-          <div className='text-xl tracking-normal font-extralight text-white'>
-            <p className='mt-4'>
-              I&apos;m a full-stack engineer with a background in science
-              education. Informed by my experience developing and implementing
-              curricula, I create robust applications that are intuitive for
-              users and colleagues alike.
-            </p>
-
-            <p className='mt-4'>
-              I&apos;m also passionate about continuous learning and love that
-              tech is an endless opportunity for growth. I enjoy exploring all
-              facets of development and favor frameworks that foster scalable,
-              performant applications.
-            </p>
-            <p className='font-normal text-lg mt-4 ml-12 text-stone-300'>
-              tools & technologies
-            </p>
-            <div className='flex flex-col items-start mt-1 ml-12'>
-              <TechStack />
-            </div>
-
-            <p className='mt-12'>
-              And I started a blog; I write about my projects and recent topics
-              of interest.{' '}
-            </p>
-            <p className='font-normal text-lg mt-4 ml-12 text-stone-300'>
-              latest blog post:
-            </p>
+          <p className='font-light text-md mt-4 text-stone-400'>
+            latest blog post:{' '}
             <Link
               href={latestPost.url}
-              className='text-lg ml-12 hover:text-stone-500 underline decoration-0 underline-offset-2'
+              className=' hover:text-stone-600 underline decoration-0 underline-offset-2'
             >
               {latestPost.title}
             </Link>
-
-            <p className='mt-8 font-semibold text-lg'>
-              Currently open to new opportunities.
+          </p>
+          <div className='text-xl tracking-normal font-extralight text-white'>
+            <p className='mt-6'>
+              Hi, I&apos;m Huse (like moose 🫎), a software engineer based in
+              NYC. <br />I collaborate with clients and colleagues to build
+              robust, full-stack applications.
             </p>
-            <p className='flex mt-1'>
-              You can download my resume&nbsp;
+            <p className='mt-4'>
+              I was previously the director of education at a nonprofit science
+              museum, where I managed client-driven projects with administrators and community leaders. I&apos;m passionate about continuous learning, scientific
+              literacy, and resourceful problem-solving.
+            </p>
+            <div className='mt-8 max-w-max mx-auto'>
+              <p className='font-extralight text-base'>tools & technologies</p>
+              <div className='flex flex-col items-start'>
+                <TechStack />
+              </div>
+            </div>
+            <p className='mt-10'>I&apos;m currently open to new opportunities.</p>
+            <p className='mt-1 text-lg'>
+              You can download my resume{' '}
               <Link
                 href='/pdfs/huseKivrakResume.pdf'
                 target='_blank'
