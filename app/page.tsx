@@ -76,11 +76,9 @@ export default async function App() {
               robust, full-stack applications.
             </p>
             <p className='mt-4'>
-              I was previously director of education at a nonprofit science
-              museum, where I managed client-driven projects alongside school
-              administrators and community leaders. I&apos;m passionate about
-              continuous learning, scientific literacy, and resourceful
-              problem-solving.
+              I&apos;m passionate about continuous learning, scientific
+              literacy, and resourceful problem-solving. Before tech, I worked
+              in nonprofit science education as an educator and director.
             </p>
             <div className='mt-8 max-w-max mx-auto'>
               <p className='font-extralight text-base'>tools & technologies</p>
@@ -88,7 +86,7 @@ export default async function App() {
                 <TechStack />
               </div>
             </div>
-            <p className='mt-10'>
+            <p className='mt-14'>
               I&apos;m currently open to new opportunities.
             </p>
             <p className='mt-1 text-lg'>
