@@ -11,4 +11,5 @@ export type Tech = {
     title: string,
     Icon: React.ComponentType<React.HTMLAttributes<HTMLElement>>
     color: string,
+    url: string,
 }

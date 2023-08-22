@@ -81,7 +81,7 @@ export default async function App() {
               in nonprofit science education as an educator and director.
             </p>
             <div className='mt-8 max-w-max mx-auto'>
-              <p className='font-extralight text-base'>tools & technologies</p>
+              <p className='mb-4 font-extralight text-base'>tools & technologies</p>
               <div className='flex flex-col items-start'>
                 <TechStack />
               </div>
