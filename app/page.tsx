@@ -72,7 +72,7 @@ export default async function App() {
           <div className='text-xl tracking-normal font-extralight text-white'>
             <p className='mt-6'>
               Hi, I&apos;m Huse (like moose 🫎), a software engineer and former
-              education director based in NYC. I'm passionate about scientific
+              education director based in NYC. I&apos;m passionate about scientific
               literacy, continuous learning, and creative coding.
             </p>
 
