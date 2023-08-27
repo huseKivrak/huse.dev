@@ -71,25 +71,23 @@ export default async function App() {
           </p>
           <div className='text-xl tracking-normal font-extralight text-white'>
             <p className='mt-6'>
-              Hi, I&apos;m Huse (like moose 🫎), a software engineer based in
-              NYC. <br />I collaborate with clients and colleagues to build
-              robust, full-stack applications.
+              Hi, I&apos;m Huse (like moose 🫎), a software engineer and former
+              education director based in NYC. I'm passionate about scientific
+              literacy, continuous learning, and creative coding.
             </p>
-            <p className='mt-4'>
-              I&apos;m passionate about continuous learning, scientific
-              literacy, and resourceful problem-solving. Before tech, I worked
-              in nonprofit science education as an educator and director.
-            </p>
-            <div className='mt-8 max-w-max mx-auto'>
-              <p className='mb-4 font-extralight text-base'>tools & technologies</p>
+
+            <div className='mt-4 max-w-max'>
+              <p className='mb-4 font-extralight underline decoration-0 underline-offset-8'>
+                tools & technologies
+              </p>
               <div className='flex flex-col items-start'>
                 <TechStack />
               </div>
             </div>
-            <p className='mt-14'>
-              I&apos;m currently open to new opportunities.
+            <p className='mt-12'>
+              Currently open to new opportunities.
             </p>
-            <p className='mt-1 text-lg'>
+            <p className='mt-1'>
               You can download my resume{' '}
               <Link
                 href='/pdfs/huseKivrakResume.pdf'

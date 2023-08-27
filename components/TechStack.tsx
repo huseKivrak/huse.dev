@@ -89,7 +89,7 @@ export default function TechStack() {
           key={tech.title}
         >
           <tech.Icon
-            className={`text-3xl ${tech.color} opacity-50 hover:opacity-100 transition-opacity duration-200`}
+            className={`text-3xl ${tech.color} opacity-60 hover:opacity-100 transition-opacity duration-200`}
           />
           <span className='absolute left-1/2 transform -translate-x-1/2 bottom-full bg-stone-700 text-white text-xs rounded px-1 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200'>
             {tech.title}
