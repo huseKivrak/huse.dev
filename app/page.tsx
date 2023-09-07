@@ -90,7 +90,7 @@ export default async function App() {
             <p className='mt-1'>
               You can download my resume{' '}
               <Link
-                href='/pdfs/Huse_Kivrak_Resume_2023.pdf'
+                href='/pdfs/Huse_Kivrak_Resume.pdf'
                 target='_blank'
                 className='font-light text-white underline decoration-0 underline-offset-2 hover:text-stone-400'
               >
