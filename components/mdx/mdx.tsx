@@ -1,7 +1,19 @@
 import './mdx.css';
+import MDXImage from './MDXImage';
 import type { MDXComponents } from 'mdx/types';
 
-export const mdxComponents: MDXComponents = {
+type MDXImageProps = {
+  src: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+};
+
+type ExtendedMDXComponents = MDXComponents & {
+  Image?: React.FC<MDXImageProps> & { defaultProps?: Partial<MDXImageProps> };
+};
+
+export const mdxComponents: ExtendedMDXComponents = {
   //   h1: (props) => (
   //     <h1
   //       className='text-5xl font-thin text-white tracking-widest mt-8'
@@ -55,5 +67,7 @@ export const mdxComponents: MDXComponents = {
   em: (props) => <em className='' {...props} />,
   strong: (props) => <strong className='font-light' {...props} />,
   img: (props) => <img className='mx-auto mt-4' {...props} />,
-  //   figcaption: (props) => <figcaption className='text-sm font-thin italic' {...props} />
-};
+
+
+  Image: MDXImage,
+} as ExtendedMDXComponents;
