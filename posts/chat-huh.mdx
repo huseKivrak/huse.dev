@@ -187,18 +187,20 @@ Now we just need to figure out how 'chat huh' will communicate.
 ## the final piece
 
 Embarrassingly, I got the idea from this meme:
-![spongemock](/images/blog/spongememe.png)
+
+<div style={{ width: '100%', maxWidth: '250px' }}>
+  <Image src='/images/blog/spongememe.png' alt='spongemock' />
+</div>
 
 Turns out the easiest way to fake communication is by using the laziest kind: mockery.
 
 ```js
 function makeMockery(phrase) {
   //returns PHrAsE
-  const mockery = phrase.split('')
+  const mockery = phrase
+    .split('')
     .map((char) =>
-      Math.random() < 0.6
-        ? char.toUpperCase()
-        : char.toLowerCase()
+      Math.random() < 0.6 ? char.toUpperCase() : char.toLowerCase()
     )
     .join('');
 
@@ -206,8 +208,8 @@ function makeMockery(phrase) {
 }
 ```
 
-<br/>
-<br/>
+<br />
+<br />
 And one more function, to handle inputs & clean up the event handler:
 
 ```js
@@ -223,15 +225,17 @@ function getTrickorMockery(input) {
   new TypeIt('#output', {
     strings: mockery,
     speed: 25,
-    }).go();
+  }).go();
 }
-
 ```
+
 In other words, unless it's prompted correctly,
 'chat huh' just throws your words back at you - _mockingly_.
-<br/>
+
+<br />
 
 ## conclusion
+
 And that's it! Now a sarcastic jerk, 'chat huh' side-stepped
 the interactivity problem and was performance-ready.
 Here's the [demo link](https://youtu.be/eZv5wb56MB0) again
@@ -242,8 +246,7 @@ Granted, I've explained none of the actual "magic" involved
 I hope this behind-the-scenes peek inspires you
 to meld your own passions, encounter fun challenges,
 and find quirky solutions.
-<br/>
-_**Questions? Comments? [Send me an email](mailto:huse@husekivrak.com);
-I'd love to hear from you!**_
 
-```
+<br />
+_**Questions? Comments? [Send me an email](mailto:huse@husekivrak.com); I'd love
+to hear from you!**_
