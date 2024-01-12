@@ -1,9 +1,10 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Josefin_Sans } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/react';
+
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const jose = Josefin_Sans({
   subsets: ['latin'],
@@ -26,7 +27,7 @@ export default function RootLayout({
         <main className='flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0'>
           <Nav />
           {children}
-          <Analytics />
+          <SpeedInsights/>
         </main>
       </body>
       <Footer />
