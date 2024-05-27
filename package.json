@@ -53,5 +53,10 @@
   },
   "devDependencies": {
     "encoding": "^0.1.13"
+  },
+  "overrides": {
+    "next-contentlayer": {
+      "next": "$next"
+    }
   }
 }
