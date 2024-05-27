@@ -1,4 +1,4 @@
-import {Project} from './types';
+import { Project } from './types';
 
 /** NAV LINKS */
 export const NAV_LINKS = [
@@ -40,10 +40,10 @@ export const PROJECT_LIST: Project[] = [
 	},
 
 	{
-		title: 'RithmGo',
+		title: 'StudentGo',
 		image: '/images/projects/rithmgo.jpg',
-		description: 'a mobile application for students',
-		github: 'https://github.com/husekivrak/rithmgo',
+		description: 'a mobile application for students using the Rithm School API',
+		github: 'https://github.com/husekivrak/studentgo',
 		tags: ['React Native', 'TypeScript'],
 	},
 ];
