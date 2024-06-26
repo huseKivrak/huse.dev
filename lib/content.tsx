@@ -23,6 +23,14 @@ export const NAV_LINKS = [
 /** PROJECTS */
 export const PROJECT_LIST: Project[] = [
 	{
+		title: 'AMP Portal',
+		description: 'a customer service dashboard for car wash memberships',
+		image: '/images/projects/amp.png',
+		url: 'https://amp.husekivrak.com',
+		github: 'https://github.com/husekivrak/car-wash-portal',
+		tags: ['Next.js', 'TypeScript', 'PostgreSQL'],
+	},
+	{
 		title: 'Jobly',
 		description: 'a job search web application',
 		image: '/images/projects/jobly.png',
