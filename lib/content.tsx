@@ -23,8 +23,15 @@ export const NAV_LINKS = [
 /** PROJECTS */
 export const PROJECT_LIST: Project[] = [
 	{
+		title: 'npSpeak',
+		description: 'AI-powered NPC voice synthesis',
+		image: '/images/projects/npspeak.png',
+		github: 'https://github.com/husekivrak/npspeak',
+		tags: ['Next.js', 'TypeScript', 'AWS', 'ElevenLabs'],
+	},
+	{
 		title: 'AMP Portal',
-		description: 'a customer service dashboard for car wash memberships',
+		description: 'a customer service dashboard',
 		image: '/images/projects/amp.png',
 		url: 'https://amp.husekivrak.com',
 		github: 'https://github.com/husekivrak/car-wash-portal',
@@ -46,7 +53,6 @@ export const PROJECT_LIST: Project[] = [
 		github: 'https://github.com/husekivrak/warbler',
 		tags: ['Flask', 'PostgreSQL', 'SQLAlchemy'],
 	},
-
 	{
 		title: 'StudentGo',
 		image: '/images/projects/rithmgo.jpg',
