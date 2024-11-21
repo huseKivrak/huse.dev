@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { Separator } from '@/components/ui/separator';
 
 export default async function App() {
-	const latestPost = allPosts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))[0];
+	const latestPost = allPosts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))[ 0 ];
 
 	return (
 		<div>
@@ -71,7 +71,7 @@ export default async function App() {
 								<TechStack />
 							</div>
 						</div>
-						<p className='mt-12'>Currently open to new opportunities.</p>
+						{/* <p className='mt-12'>Currently open to new opportunities.</p>
 						<p className='mt-1'>
 							You can download my resume{' '}
 							<Link
@@ -82,7 +82,7 @@ export default async function App() {
 								here
 							</Link>
 							.
-						</p>
+						</p> */}
 					</div>
 				</div>
 			</div>
