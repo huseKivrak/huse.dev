@@ -1,34 +1,114 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# huse.dev
 
-## Getting Started
+personal website and portfolio for huse, featuring projects showcase and an ai-powered digital assistant.
 
-First, run the development server:
+## overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+this is the source code for [huse.dev](https://huse.dev), a modern, minimalist personal website built with next.js 15, tailwindcss, and supabase. the site features:
+
+- **portfolio showcase** - highlighting key projects and technical work
+- **butler assistant** - an ai-powered conversational agent for interactive engagement
+- **sleek design** - post-modern aesthetic with blacks and stone greys [[memory:2224217]]
+- **responsive layout** - optimized for all devices
+
+## tech stack
+
+- **framework**: next.js 15.3.5 with app router
+- **styling**: tailwindcss v4
+- **database**: supabase (postgresql)
+- **ai integration**: elevenlabs conversational ai
+- **deployment**: vercel
+
+## structure
+
+```
+huse.dev/
+├── huse-dev-app/         # main application
+│   ├── app/              # next.js app directory
+│   │   ├── page.tsx      # home page
+│   │   ├── projects/     # projects showcase
+│   │   ├── about/        # about & contact
+│   │   └── butler/       # ai assistant interface
+│   ├── components/       # reusable components
+│   │   ├── ButlerAgent.tsx
+│   │   └── Navigation.tsx
+│   └── lib/              # utilities & configs
+│       └── supabase.ts
+└── .vercel/              # deployment configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## getting started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- node.js 18+ and npm
+- supabase account (for database)
+- elevenlabs account (for butler ai)
 
-## Learn More
+### installation
 
-To learn more about Next.js, take a look at the following resources:
+1. clone the repository
+```bash
+git clone https://github.com/yourusername/huse.dev.git
+cd huse.dev/huse-dev-app
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. install dependencies
+```bash
+npm install
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. set up environment variables
+```bash
+cp env.example .env.local
+```
 
-## Deploy on Vercel
+then edit `.env.local` with your credentials:
+```
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_ELEVENLABS_AGENT_ID=your_agent_id
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. run the development server
+```bash
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+open [http://localhost:3000](http://localhost:3000) to view the site.
+
+## deployment
+
+the site is configured for deployment on vercel:
+
+```bash
+vercel
+```
+
+environment variables are configured in `vercel.json` to use vercel secrets.
+
+## features
+
+### butler assistant
+- text and voice interaction modes
+- customizable responses
+- conversation persistence
+- modern glass-morphism ui
+
+### portfolio
+- project showcase with live demos
+- technical stack highlights
+- github integration
+
+### responsive design
+- mobile-first approach
+- smooth animations
+- accessibility focused
+
+## license
+
+mit license - feel free to use this as inspiration for your own projects.
+
+---
+
+built with ❤️ by huse

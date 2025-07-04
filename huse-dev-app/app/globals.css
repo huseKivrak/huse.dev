@@ -1,0 +1,36 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 95%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-sm bg-stone-900/10 border border-stone-800/20;
+  }
+
+  .hover-lift {
+    @apply transform transition-all duration-300 hover:-translate-y-0.5;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-stone-100 to-stone-400 bg-clip-text text-transparent;
+  }
+
+  .link-underline {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-stone-400 after:transition-all after:duration-300 hover:after:w-full;
+  }
+}
