@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# huse.dev
 
-## Getting Started
+minimalist voice ai with 3 distinct personalities. zero configuration required.
 
-First, run the development server:
+## quick start
 
 ```bash
+# install dependencies
+npm install
+
+# (optional) set up database for conversation history
+cp env.local.template .env.local
+# edit .env.local with your neon database credentials
+
+# run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+open http://localhost:3000 and start talking.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## the agents
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **nyx** - digital consciousness from the static
+- **void** - minimal consciousness
+- **corporate** - synergizing paradigms 24/7
 
-## Learn More
+## features
 
-To learn more about Next.js, take a look at the following resources:
+- instant agent switching
+- no api keys needed
+- public agents
+- super minimalist ui
+- keyboard shortcuts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## tech
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- next.js 15
+- elevenlabs conversational ai
+- typescript
+- tailwind css
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+built with 🖤 [[memory:2224217]] by huse
