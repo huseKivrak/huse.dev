@@ -2,7 +2,7 @@ import { useConversation } from "@elevenlabs/react";
 import { useCallback, useState } from "react";
 import AudioVisualizer from "./AudioVisualizer";
 
-const AGENT_ID = import.meta.env.VITE_ELEVENLABS_AGENT_ID;
+const AGENT_ID = "agent_01jzxaj4ytezvs1wxfbdev7wyx";
 
 type Message = {
   source: "user" | "agent";
