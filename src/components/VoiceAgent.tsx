@@ -1,8 +1,8 @@
-"use client";
-
 import { useConversation } from "@elevenlabs/react";
 import { useCallback, useState } from "react";
 import AudioVisualizer from "./AudioVisualizer";
+
+const AGENT_ID = import.meta.env.VITE_ELEVENLABS_AGENT_ID;
 
 type Message = {
   source: "user" | "agent";
@@ -15,19 +15,12 @@ export default function VoiceAgent() {
 
   const conversation = useConversation({
     onMessage: (message) => {
-      if (
-        message.source === "ai" &&
-        message.message &&
-        !message.message.startsWith("[")
-      ) {
+      if (message.source === "ai" && message.message) {
         setMessages((prev) => [
           ...prev,
           { source: "agent", text: message.message },
         ]);
-      } else if (
-        message.source === "user" &&
-        message.message
-      ) {
+      } else if (message.source === "user" && message.message) {
         setMessages((prev) => [
           ...prev,
           { source: "user", text: message.message },
@@ -56,31 +49,16 @@ export default function VoiceAgent() {
       return;
     }
 
-    const agentId = process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID;
-    const hasApiKey = process.env.NEXT_PUBLIC_HAS_API_KEY === "true";
-
-    if (!agentId) {
-      setErrorMessage(
-        "Voice agent not configured. Set NEXT_PUBLIC_ELEVENLABS_AGENT_ID in your environment."
-      );
+    if (!AGENT_ID) {
+      setErrorMessage("Voice agent not configured.");
       return;
     }
 
     try {
-      if (hasApiKey) {
-        const response = await fetch("/api/signed-url");
-        if (!response.ok) throw new Error("Failed to get signed URL");
-        const { signedUrl } = await response.json();
-        await conversation.startSession({
-          signedUrl,
-          connectionType: "websocket",
-        });
-      } else {
-        await conversation.startSession({
-          agentId,
-          connectionType: "websocket",
-        });
-      }
+      await conversation.startSession({
+        agentId: AGENT_ID,
+        connectionType: "websocket",
+      });
     } catch (err) {
       console.error("Failed to start conversation:", err);
       setErrorMessage("Failed to connect. Please try again.");
@@ -104,7 +82,7 @@ export default function VoiceAgent() {
 
   return (
     <div className="flex flex-col items-center gap-8 w-full">
-      {/* Orb / Visualizer */}
+      {/* Orb */}
       <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96">
         <AudioVisualizer
           getFrequencyData={isConnected ? getOutputFrequency : null}
@@ -112,12 +90,12 @@ export default function VoiceAgent() {
           isSpeaking={conversation.isSpeaking}
         />
 
-        {/* Center content inside orb */}
+        {/* Center content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
           {!isConnected && !isConnecting && (
             <button
               onClick={startConversation}
-              className="pointer-events-auto group flex flex-col items-center gap-3 transition-all duration-300"
+              className="pointer-events-auto group flex flex-col items-center gap-3 cursor-pointer"
               aria-label="Start voice conversation"
             >
               <svg
@@ -150,15 +128,13 @@ export default function VoiceAgent() {
           )}
 
           {isConnected && (
-            <div className="flex flex-col items-center gap-3">
-              <span className="text-sm tracking-widest text-stone-400 uppercase">
-                {conversation.isSpeaking ? "speaking" : "listening"}
-              </span>
-            </div>
+            <span className="text-sm tracking-widest text-stone-400 uppercase">
+              {conversation.isSpeaking ? "speaking" : "listening"}
+            </span>
           )}
         </div>
 
-        {/* Input visualizer ring (when user is speaking) */}
+        {/* Input visualizer (when user speaks) */}
         {isConnected && !conversation.isSpeaking && (
           <div className="absolute inset-0 opacity-40 pointer-events-none">
             <AudioVisualizer
@@ -170,11 +146,11 @@ export default function VoiceAgent() {
         )}
       </div>
 
-      {/* Controls */}
+      {/* End button */}
       {isConnected && (
         <button
           onClick={stopConversation}
-          className="text-sm tracking-widest text-stone-500 hover:text-rose-300 transition-colors duration-300 uppercase"
+          className="text-sm tracking-widest text-stone-500 hover:text-rose-300 transition-colors duration-300 uppercase cursor-pointer"
           aria-label="End conversation"
         >
           end conversation
