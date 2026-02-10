@@ -15,6 +15,9 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      sans: ['"Josefin Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
