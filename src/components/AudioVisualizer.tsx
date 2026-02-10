@@ -1,9 +1,7 @@
-"use client";
-
 import { useEffect, useRef, useCallback } from "react";
 
 interface AudioVisualizerProps {
-  getFrequencyData: (() => Uint8Array) | null;
+  getFrequencyData: (() => Uint8Array | undefined) | null;
   isActive: boolean;
   isSpeaking: boolean;
 }
@@ -40,7 +38,7 @@ export default function AudioVisualizer({
     let frequencyData: Uint8Array | null = null;
     if (getFrequencyData && isActive) {
       try {
-        frequencyData = getFrequencyData();
+        frequencyData = getFrequencyData() ?? null;
       } catch {
         frequencyData = null;
       }
@@ -67,12 +65,24 @@ export default function AudioVisualizer({
     );
 
     if (isSpeaking) {
-      glowGradient.addColorStop(0, `rgba(251, 113, 133, ${0.12 + avgLevel * 0.15})`);
-      glowGradient.addColorStop(0.6, `rgba(251, 113, 133, ${0.04 + avgLevel * 0.06})`);
+      glowGradient.addColorStop(
+        0,
+        `rgba(251, 113, 133, ${0.12 + avgLevel * 0.15})`
+      );
+      glowGradient.addColorStop(
+        0.6,
+        `rgba(251, 113, 133, ${0.04 + avgLevel * 0.06})`
+      );
       glowGradient.addColorStop(1, "rgba(251, 113, 133, 0)");
     } else if (isActive) {
-      glowGradient.addColorStop(0, `rgba(214, 211, 209, ${0.08 + avgLevel * 0.1})`);
-      glowGradient.addColorStop(0.6, `rgba(214, 211, 209, ${0.03 + avgLevel * 0.04})`);
+      glowGradient.addColorStop(
+        0,
+        `rgba(214, 211, 209, ${0.08 + avgLevel * 0.1})`
+      );
+      glowGradient.addColorStop(
+        0.6,
+        `rgba(214, 211, 209, ${0.03 + avgLevel * 0.04})`
+      );
       glowGradient.addColorStop(1, "rgba(214, 211, 209, 0)");
     } else {
       glowGradient.addColorStop(0, "rgba(214, 211, 209, 0.04)");
@@ -97,18 +107,14 @@ export default function AudioVisualizer({
         radius += freqValue * baseRadius * 0.25;
       }
 
-      // Idle breathing animation
-      const breathe = Math.sin(time * 1.5) * 2;
-      radius += breathe;
+      // Idle breathing
+      radius += Math.sin(time * 1.5) * 2;
 
       const x = centerX + Math.cos(angle) * radius;
       const y = centerY + Math.sin(angle) * radius;
 
-      if (i === 0) {
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
-      }
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
     }
     ctx.closePath();
 
