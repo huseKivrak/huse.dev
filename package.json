@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@elevenlabs/react": "^0.14.0",
     "@headlessui/react": "^1.7.16",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-dropdown-menu": "^2.0.5",
