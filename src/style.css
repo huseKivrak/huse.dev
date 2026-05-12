@@ -2,4 +2,21 @@ body {
   margin: 0;
   min-height: 100vh;
   background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#app {
+  width: 100%;
+  max-width: 800px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+#app img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
