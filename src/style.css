@@ -5,7 +5,7 @@ body {
 }
 
 #app {
-  min-height: 100vh;
+  min-height: calc(100vh - 72px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,4 +19,91 @@ body {
   line-height: 1.1;
   padding: 0 5vw;
   word-break: break-word;
+}
+
+/* --- PR wire lower-third --- */
+.lower-third {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  display: none;
+  align-items: stretch;
+  background: linear-gradient(180deg, #16181d 0%, #0b0c0f 100%);
+  border-top: 2px solid #c8102e;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #fff;
+}
+.lower-third.on { display: flex; }
+.lt-badge {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+  background: #c8102e;
+  z-index: 2;
+  box-shadow: 8px 0 16px rgba(0, 0, 0, 0.6);
+}
+.lt-badge .top {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.85);
+}
+.lt-badge .main {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  font-style: italic;
+}
+.lt-viewport {
+  flex: 1 1 auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.lt-crawl {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+  animation: lt-crawl var(--dur, 60s) linear infinite;
+}
+@keyframes lt-crawl {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.lt-item {
+  display: inline-flex;
+  align-items: baseline;
+  padding: 0 1.5em;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 1rem;
+}
+.lt-item .time {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ffb612;
+  letter-spacing: 0.1em;
+  margin-right: 0.9em;
+  font-variant-numeric: tabular-nums;
+}
+.lt-item .headline { font-size: 1.05rem; font-weight: 600; }
+.lt-item .quip {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #9aa0aa;
+  margin-left: 0.9em;
+}
+.lt-sep {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #c8102e;
+  transform: rotate(45deg);
+  margin: 0 0.25em;
 }
