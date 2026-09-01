@@ -73,9 +73,9 @@ function renderTicker(items: TickerItem[]): void {
 
 async function pollTicker(): Promise<void> {
   try {
-    const res = await fetch(`/api/ticker?t=${Date.now()}`, { cache: 'no-store' })
+    const res = await fetch(`/ticker.json?t=${Date.now()}`, { cache: 'no-store' })
     if (!res.ok) return
-    const { items } = await res.json()
+    const items = await res.json()
     const json = JSON.stringify(items)
     if (json !== lastJson) {
       lastJson = json

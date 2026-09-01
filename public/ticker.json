@@ -1,0 +1,19 @@
+[
+  {"id":2447,"headline":"DEC 2020, PR 2447: Added Project Structure and Deals Entity","quip":"the genesis commit. in the beginning there were deals."},
+  {"id":2469,"headline":"DEC 2020, PR 2469: Added Auth","quip":"the first login. every PR since has been downstream of this one."},
+  {"id":2588,"headline":"JAN 2021, PR 2588: Stripe Create and Update Subscription","quip":"the billing engine draws first breath."},
+  {"id":4860,"headline":"FEB 2022, PR 4860: Added Azure Functions and Evox Sync","quip":"10,672 lines and a whole Serverless leg of the platform is born."},
+  {"id":6603,"headline":"NOV 2022, PR 6603: Added Kiosk Project","quip":"an entire product line starts in one PR."},
+  {"id":8806,"headline":"JAN 2024, PR 8806: fix typo","quip":"full PR ceremony, two votes, one certified approver. two words."},
+  {"id":9900,"headline":"JUL 2024, PR 9900: Flagstop is actually built pre apple privacy review","quip":"'actually' has never worked harder. you can hear the deadline."},
+  {"id":10379,"headline":"SEP 2024, PR 10379: Fixed SQL Migration Again","quip":"migrations are immutable. except this one. twice."},
+  {"id":11186,"headline":"JAN 2025, PR 11186: Color of 'please pull forward' text in kiosk is hardcoded white","quip":"a bug title that doubles as car wash haiku."},
+  {"id":14346,"headline":"FEB 2026, PR 14345 + 14346: 'revert the revert on master', then 'Fixing Reverts'","quip":"a two-act play, 95 minutes apart."},
+  {"id":14551,"headline":"MAR 2026, PR 14551: Revert NASCAR Lottie","quip":"the most evocative three words in the repo. an animation deemed too much."},
+  {"id":15431,"headline":"JUN 2026, PR 15428 to 15431: the OAuth double-revert day","quip":"reverted at 4 AM, un-reverted by dinner. one day, whole saga."},
+  {"id":15412,"headline":"JUN 2026, PR 15412: Portal/Webapp yarn/CRA to pnpm/vite","quip":"the rewrite that defined the current era. net minus 17k lines."},
+  {"id":15687,"headline":"JUL 2026, PR 15687: Convert remaining projects to pnpm","quip":"5,969 files changed, 131,926 deletions. the undisputed heavyweight."},
+  {"id":15099,"headline":"MAY 2026, PR 15099: Coach Al Schema","quip":"the flagship AI feature's founding document."},
+  {"id":15998,"headline":"AUG 2026, PR 15998: Hotfix for Coach Al Transcription Thinking Budget","quip":"a production emergency about an AI's thinking budget. peak 2026."},
+  {"id":15875,"headline":"JUL 2026, PR 15875: Merge preprod to production to revert PR that caused blocking bug","quip":"no feature name, no ticket. just raw incident narration."}
+]
