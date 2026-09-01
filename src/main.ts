@@ -26,7 +26,7 @@ interface TickerItem {
 const bar = document.createElement('div')
 bar.className = 'lower-third'
 bar.innerHTML =
-  '<div class="lt-badge"><span class="top">PR WIRE</span><span class="main">JUST IN</span></div>' +
+  '<div class="lt-badge"><span class="top">PR WIRE</span><span class="main">ALL TIME</span></div>' +
   '<div class="lt-viewport"><div class="lt-crawl"></div></div>'
 document.body.appendChild(bar)
 const crawl = bar.querySelector<HTMLDivElement>('.lt-crawl')!
