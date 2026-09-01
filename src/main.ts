@@ -4,7 +4,7 @@ const app = document.querySelector<HTMLDivElement>('#app')!
 
 async function render(): Promise<void> {
   try {
-    const res = await fetch('/api/msg', { cache: 'no-store' })
+    const res = await fetch(`/api/msg?t=${Date.now()}`, { cache: 'no-store' })
     const { message } = await res.json()
     app.textContent = message || ''
   } catch {
@@ -73,7 +73,7 @@ function renderTicker(items: TickerItem[]): void {
 
 async function pollTicker(): Promise<void> {
   try {
-    const res = await fetch('/api/ticker', { cache: 'no-store' })
+    const res = await fetch(`/api/ticker?t=${Date.now()}`, { cache: 'no-store' })
     if (!res.ok) return
     const { items } = await res.json()
     const json = JSON.stringify(items)
