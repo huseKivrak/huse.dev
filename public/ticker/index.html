@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>ticker</title>
+<style>
+  :root {
+    --bar-h: 72px;
+    --accent: #c8102e;
+    --gold: #ffb612;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: #000;
+    color: #fff;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+  }
+  .stage {
+    height: calc(100% - var(--bar-h));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .stage .clock {
+    font-size: clamp(2rem, 8vw, 6rem);
+    font-weight: 200;
+    letter-spacing: 0.08em;
+    color: #222;
+    font-variant-numeric: tabular-nums;
+  }
+  .lower-third {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--bar-h);
+    display: flex;
+    align-items: stretch;
+    background: linear-gradient(180deg, #16181d 0%, #0b0c0f 100%);
+    border-top: 2px solid var(--accent);
+  }
+  .badge {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+    background: var(--accent);
+    z-index: 2;
+    box-shadow: 8px 0 16px rgba(0,0,0,0.6);
+  }
+  .badge .top {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.85);
+  }
+  .badge .main {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    font-style: italic;
+  }
+  .crawl-viewport {
+    flex: 1 1 auto;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .crawl {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    will-change: transform;
+    animation: crawl var(--dur, 60s) linear infinite;
+  }
+  @keyframes crawl {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .item { display: inline-flex; align-items: baseline; padding: 0 1.5em; }
+  .item .time {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-right: 0.9em;
+    font-variant-numeric: tabular-nums;
+  }
+  .item .headline { font-size: 1.05rem; font-weight: 600; }
+  .item .quip {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: #9aa0aa;
+    margin-left: 0.9em;
+  }
+  .sep {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    margin: 0 0.25em;
+  }
+  .empty { color: #555; font-size: 0.95rem; padding-left: 1.5em; font-style: italic; }
+</style>
+</head>
+<body>
+  <div class="stage"><div class="clock" id="clock"></div></div>
+  <div class="lower-third">
+    <div class="badge"><span class="top">PR WIRE</span><span class="main">JUST IN</span></div>
+    <div class="crawl-viewport"><div class="crawl" id="crawl"><span class="empty">standing by for pull requests…</span></div></div>
+  </div>
+<script>
+  const crawl = document.getElementById('crawl');
+  let lastJson = '';
+
+  function fmtTime(t) {
+    const d = new Date(t);
+    if (isNaN(d)) return '';
+    return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  }
+
+  function render(items) {
+    if (!items.length) {
+      crawl.innerHTML = '<span class="empty">standing by for pull requests…</span>';
+      crawl.style.animation = 'none';
+      return;
+    }
+    const one = items.map(it => {
+      const time = it.t ? `<span class="time">${fmtTime(it.t)}</span>` : '';
+      const quip = it.quip ? `<span class="quip">${esc(it.quip)}</span>` : '';
+      return `<span class="item">${time}<span class="headline">${esc(it.headline || '')}</span>${quip}</span><span class="sep"></span>`;
+    }).join('');
+    crawl.innerHTML = one + one; // duplicate for seamless -50% loop
+    crawl.style.animation = 'none';
+    void crawl.offsetWidth;
+    const dur = Math.max(30, crawl.scrollWidth / 2 / 90); // ~90px/s
+    crawl.style.setProperty('--dur', dur + 's');
+    crawl.style.animation = '';
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  async function poll() {
+    try {
+      const res = await fetch('/api/ticker', { cache: 'no-store' });
+      if (!res.ok) return;
+      const { items } = await res.json();
+      const json = JSON.stringify(items);
+      if (json !== lastJson) { lastJson = json; render(items || []); }
+    } catch { /* keep last crawl */ }
+  }
+  poll();
+  setInterval(poll, 30000);
+
+  const clock = document.getElementById('clock');
+  function tickClock() {
+    clock.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' });
+  }
+  tickClock();
+  setInterval(tickClock, 1000);
+</script>
+</body>
+</html>
