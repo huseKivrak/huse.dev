@@ -1,22 +1,11 @@
 body {
   margin: 0;
-  min-height: 100vh;
   background: #000;
 }
 
-#app {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  text-align: center;
-  font-size: clamp(2rem, 10vw, 8rem);
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-  padding: 0 5vw;
-  word-break: break-word;
+main {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
 }
