@@ -25,21 +25,6 @@ main {
   pointer-events: none;
 }
 
-.flash {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: #fff;
-  opacity: 0;
-  transition: opacity 300ms ease-out;
-  pointer-events: none;
-}
-
-.flash.on {
-  opacity: 0.6;
-  transition: none;
-}
-
 /* The player sits fully visible underneath the photo rather than hidden:
    mobile browsers, iOS especially, won't autoplay video they consider
    invisible, which blocked both the preload and the start on trigger.

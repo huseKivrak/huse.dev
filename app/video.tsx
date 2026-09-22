@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-const VIDEO_ID = 'dQw4w9WgXcQ'
-
 // The slice of the YouTube IFrame Player API used here.
 type Player = {
   playVideo(): void
@@ -27,23 +25,23 @@ declare global {
   }
 }
 
+// Shared by every player on the page so the API script loads only once.
+let api: Promise<void> | null = null
+
 function loadApi(): Promise<void> {
-  return new Promise((resolve) => {
+  api ??= new Promise((resolve) => {
     if (window.YT?.Player) return resolve()
-    const previous = window.onYouTubeIframeAPIReady
-    window.onYouTubeIframeAPIReady = () => {
-      previous?.()
-      resolve()
-    }
+    window.onYouTubeIframeAPIReady = resolve
     const script = document.createElement('script')
     script.src = 'https://www.youtube.com/iframe_api'
     document.head.appendChild(script)
   })
+  return api
 }
 
 // A full-screen YouTube player that loads under the photo as soon as the page opens
 // on a touch device, so play() starts the video with no loading delay.
-export function useVideo() {
+export function useVideo(videoId: string) {
   const mountRef = useRef<HTMLDivElement>(null)
   const player = useRef<Player | null>(null)
   const wanted = useRef(false)
@@ -91,7 +89,7 @@ export function useVideo() {
       const el = document.createElement('div')
       mountRef.current.appendChild(el)
       new window.YT!.Player(el, {
-        videoId: VIDEO_ID,
+        videoId,
         width: '100%',
         height: '100%',
         playerVars: { playsinline: 1, rel: 0, mute: 1 },
@@ -118,7 +116,7 @@ export function useVideo() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [videoId])
 
   return { mountRef, visible, play }
 }

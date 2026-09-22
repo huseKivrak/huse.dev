@@ -72,19 +72,17 @@ function thumbsOnBothEyes(touches: TouchList, [a, b]: Circle[]): boolean {
 export default function Artemis() {
   const ref = useRef<HTMLElement>(null)
   const [debug, setDebug] = useState<ReturnType<typeof layout> | null>(null)
-  const [flash, setFlash] = useState(false)
-  const video = useVideo()
+  const rickroll = useVideo('dQw4w9WgXcQ') // Rick Astley, Never Gonna Give You Up
+  const knicks = useVideo('YgevWWlg5LI') // Golden Hoops, Knicks 2026 championship mini-movie
 
   const actions = {
     // Both thumbs on her eyes.
     eyes() {
-      video.play()
+      rickroll.play()
     },
-    // Her nose scratched enough. Placeholder until it does something real.
+    // Her nose scratched enough.
     nose() {
-      navigator.vibrate?.(40)
-      setFlash(true)
-      setTimeout(() => setFlash(false), 300)
+      knicks.play()
     },
   }
   const actionsRef = useRef(actions)
@@ -156,8 +154,9 @@ export default function Artemis() {
         />
       ))}
       {debug && <CapsuleOutline {...debug.nose} />}
-      <div className={flash ? 'flash on' : 'flash'} />
-      <div ref={video.mountRef} className={video.visible ? 'video on' : 'video'} />
+      {[rickroll, knicks].map((video, i) => (
+        <div key={i} ref={video.mountRef} className={video.visible ? 'video on' : 'video'} />
+      ))}
     </main>
   )
 }

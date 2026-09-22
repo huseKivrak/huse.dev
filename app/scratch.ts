@@ -5,9 +5,9 @@
 // How far back in time scratching is judged over.
 const WINDOW_MS = 2000
 // Within that window, the finger must change direction this many times...
-const STROKES = 8
+const STROKES = 5
 // ...and travel at least this far in total.
-const DISTANCE = 0.3
+const DISTANCE = 0.18
 // Movement smaller than this is ignored as jitter when judging direction.
 const MIN_STEP = 0.006
 
