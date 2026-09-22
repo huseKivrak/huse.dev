@@ -24,15 +24,19 @@ main {
   pointer-events: none;
 }
 
+/* The player sits fully visible underneath the photo rather than hidden:
+   mobile browsers, iOS especially, won't autoplay video they consider
+   invisible, which blocked both the preload and the start on trigger.
+   On trigger it's raised above the photo. */
 .video {
   position: fixed;
   inset: 0;
+  z-index: 0;
   background: #000;
-  opacity: 0;
   pointer-events: none;
 }
 
 .video.on {
-  opacity: 1;
+  z-index: 2;
   pointer-events: auto;
 }

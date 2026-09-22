@@ -95,7 +95,11 @@ export default function Artemis() {
         placeholder="blur"
         sizes="100vw"
         draggable={false}
-        style={{ objectFit: 'cover', objectPosition: `${POSITION.x * 100}% ${POSITION.y * 100}%` }}
+        style={{
+          objectFit: 'cover',
+          objectPosition: `${POSITION.x * 100}% ${POSITION.y * 100}%`,
+          zIndex: 1,
+        }}
       />
       {debugEyes?.map((eye, i) => (
         <div
