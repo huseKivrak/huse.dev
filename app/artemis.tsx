@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import artemis from '@/public/artemis.png'
+import { useVideo } from './video'
 
 // Where the photo is anchored when object-fit: cover crops it (x, y as 0–1).
 // x is nudged left of centre so both eyes stay on screen on portrait phones.
@@ -48,14 +49,11 @@ function thumbsOnBothEyes(touches: TouchList, rect: DOMRect): boolean {
 
 export default function Artemis() {
   const ref = useRef<HTMLElement>(null)
-  const [flash, setFlash] = useState(false)
   const [debugEyes, setDebugEyes] = useState<Circle[] | null>(null)
+  const video = useVideo()
 
-  // Placeholder for whatever the gesture ends up doing.
   function activate() {
-    navigator.vibrate?.(40)
-    setFlash(true)
-    setTimeout(() => setFlash(false), 300)
+    video.play()
   }
 
   const activateRef = useRef(activate)
@@ -106,7 +104,7 @@ export default function Artemis() {
           style={{ left: eye.x - eye.r, top: eye.y - eye.r, width: eye.r * 2, height: eye.r * 2 }}
         />
       ))}
-      <div className={flash ? 'flash on' : 'flash'} />
+      <div ref={video.mountRef} className={video.visible ? 'video on' : 'video'} />
     </main>
   )
 }
