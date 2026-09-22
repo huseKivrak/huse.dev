@@ -8,4 +8,32 @@ main {
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
+  /* The page is the eye gesture: no pinch-zoom, scrolling, text selection
+     or long-press "save image" menu getting in the way of the thumbs. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.eye-debug {
+  position: absolute;
+  border: 2px solid #f0f;
+  border-radius: 50%;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  pointer-events: none;
+}
+
+.flash.on {
+  opacity: 0.6;
+  transition: none;
 }
