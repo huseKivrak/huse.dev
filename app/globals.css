@@ -16,12 +16,28 @@ main {
   -webkit-touch-callout: none;
 }
 
-.eye-debug {
+.hit-debug {
   position: absolute;
+  z-index: 1;
   border: 2px solid #f0f;
   border-radius: 50%;
   box-sizing: border-box;
   pointer-events: none;
+}
+
+.flash {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #fff;
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  pointer-events: none;
+}
+
+.flash.on {
+  opacity: 0.6;
+  transition: none;
 }
 
 /* The player sits fully visible underneath the photo rather than hidden:

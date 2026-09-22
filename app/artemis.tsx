@@ -3,14 +3,17 @@
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import artemis from '@/public/artemis.png'
+import { ScratchDetector } from './scratch'
 import { useVideo } from './video'
 
 // Where the photo is anchored when object-fit: cover crops it (x, y as 0–1).
 // x is nudged left of centre so both eyes stay on screen on portrait phones.
 const POSITION = { x: 0.45, y: 0.45 }
 
+type Point = { x: number; y: number }
+
 // Eye centres as fractions of the photo's width and height.
-const EYES = [
+const EYES: Point[] = [
   { x: 0.27, y: 0.475 },
   { x: 0.672, y: 0.47 },
 ]
@@ -19,29 +22,48 @@ const EYES = [
 // the extra room lets a thumb land a little off-centre and still count.
 const EYE_RADIUS = 0.12
 
-type Circle = { x: number; y: number; r: number }
+// The nose, including the bridge between the eyes: a capsule (a line with
+// rounded ends) from between the eyes down to the bottom of the nose pad.
+// The radius is a fraction of the rendered photo width.
+const NOSE = { from: { x: 0.466, y: 0.42 }, to: { x: 0.456, y: 0.7 }, r: 0.08 }
 
-// Map the eyes from photo coordinates to viewport coordinates, replicating
-// how object-fit: cover scales and crops the image inside `rect`.
-function eyeCircles(rect: DOMRect): Circle[] {
+type Circle = Point & { r: number }
+type Capsule = { from: Point; to: Point; r: number }
+
+// Where the photo's regions are on screen. Replicates how object-fit: cover
+// scales and crops the image inside `rect`; `width` is the photo's rendered
+// width in pixels.
+function layout(rect: DOMRect) {
   const scale = Math.max(rect.width / artemis.width, rect.height / artemis.height)
   const w = artemis.width * scale
   const h = artemis.height * scale
   const left = rect.left + (rect.width - w) * POSITION.x
   const top = rect.top + (rect.height - h) * POSITION.y
-  return EYES.map((eye) => ({ x: left + eye.x * w, y: top + eye.y * h, r: EYE_RADIUS * w }))
+  const point = (p: Point): Point => ({ x: left + p.x * w, y: top + p.y * h })
+  return {
+    width: w,
+    eyes: EYES.map((eye): Circle => ({ ...point(eye), r: EYE_RADIUS * w })),
+    nose: { from: point(NOSE.from), to: point(NOSE.to), r: NOSE.r * w } as Capsule,
+  }
 }
 
-function touching(touch: Touch, eye: Circle): boolean {
-  return Math.hypot(touch.clientX - eye.x, touch.clientY - eye.y) <= eye.r
+function inCircle(touch: Touch, circle: Circle): boolean {
+  return Math.hypot(touch.clientX - circle.x, touch.clientY - circle.y) <= circle.r
+}
+
+function inCapsule(touch: Touch, { from, to, r }: Capsule): boolean {
+  const dx = to.x - from.x
+  const dy = to.y - from.y
+  const along = ((touch.clientX - from.x) * dx + (touch.clientY - from.y) * dy) / (dx * dx + dy * dy)
+  const t = Math.min(1, Math.max(0, along))
+  return Math.hypot(touch.clientX - (from.x + t * dx), touch.clientY - (from.y + t * dy)) <= r
 }
 
 // True when two different fingers are on the screen, one on each eye.
-function thumbsOnBothEyes(touches: TouchList, rect: DOMRect): boolean {
-  const [a, b] = eyeCircles(rect)
+function thumbsOnBothEyes(touches: TouchList, [a, b]: Circle[]): boolean {
   for (let i = 0; i < touches.length; i++) {
     for (let j = 0; j < touches.length; j++) {
-      if (i !== j && touching(touches[i], a) && touching(touches[j], b)) return true
+      if (i !== j && inCircle(touches[i], a) && inCircle(touches[j], b)) return true
     }
   }
   return false
@@ -49,26 +71,51 @@ function thumbsOnBothEyes(touches: TouchList, rect: DOMRect): boolean {
 
 export default function Artemis() {
   const ref = useRef<HTMLElement>(null)
-  const [debugEyes, setDebugEyes] = useState<Circle[] | null>(null)
+  const [debug, setDebug] = useState<ReturnType<typeof layout> | null>(null)
+  const [flash, setFlash] = useState(false)
   const video = useVideo()
 
-  function activate() {
-    video.play()
+  const actions = {
+    // Both thumbs on her eyes.
+    eyes() {
+      video.play()
+    },
+    // Her nose scratched enough. Placeholder until it does something real.
+    nose() {
+      navigator.vibrate?.(40)
+      setFlash(true)
+      setTimeout(() => setFlash(false), 300)
+    },
   }
-
-  const activateRef = useRef(activate)
-  activateRef.current = activate
+  const actionsRef = useRef(actions)
+  actionsRef.current = actions
 
   useEffect(() => {
     const el = ref.current
     if (!el || !window.matchMedia('(pointer: coarse)').matches) return
 
-    let active = false
+    let eyesHeld = false
+    const scratch = new ScratchDetector()
+
     function check(event: TouchEvent) {
       event.preventDefault()
-      const both = thumbsOnBothEyes(event.touches, el!.getBoundingClientRect())
-      if (both && !active) activateRef.current()
-      active = both
+      const regions = layout(el!.getBoundingClientRect())
+
+      const both = thumbsOnBothEyes(event.touches, regions.eyes)
+      if (both && !eyesHeld) actionsRef.current.eyes()
+      eyesHeld = both
+
+      for (const touch of Array.from(event.changedTouches)) {
+        if (event.type === 'touchend' || event.type === 'touchcancel') {
+          scratch.end(touch.identifier)
+          continue
+        }
+        const at = { x: touch.clientX, y: touch.clientY }
+        const inside = inCapsule(touch, regions.nose)
+        if (scratch.move(touch.identifier, at, inside, regions.width, event.timeStamp)) {
+          actionsRef.current.nose()
+        }
+      }
     }
 
     const events = ['touchstart', 'touchmove', 'touchend', 'touchcancel'] as const
@@ -79,7 +126,7 @@ export default function Artemis() {
   // Visit /?eyes to see the hit areas while tuning them.
   useEffect(() => {
     if (!new URLSearchParams(window.location.search).has('eyes')) return
-    const update = () => setDebugEyes(eyeCircles(ref.current!.getBoundingClientRect()))
+    const update = () => setDebug(layout(ref.current!.getBoundingClientRect()))
     update()
     window.addEventListener('resize', update)
     return () => window.removeEventListener('resize', update)
@@ -101,14 +148,34 @@ export default function Artemis() {
           zIndex: 1,
         }}
       />
-      {debugEyes?.map((eye, i) => (
+      {debug?.eyes.map((eye, i) => (
         <div
           key={i}
-          className="eye-debug"
+          className="hit-debug"
           style={{ left: eye.x - eye.r, top: eye.y - eye.r, width: eye.r * 2, height: eye.r * 2 }}
         />
       ))}
+      {debug && <CapsuleOutline {...debug.nose} />}
+      <div className={flash ? 'flash on' : 'flash'} />
       <div ref={video.mountRef} className={video.visible ? 'video on' : 'video'} />
     </main>
+  )
+}
+
+function CapsuleOutline({ from, to, r }: Capsule) {
+  const length = Math.hypot(to.x - from.x, to.y - from.y)
+  const angle = Math.atan2(to.y - from.y, to.x - from.x) - Math.PI / 2
+  return (
+    <div
+      className="hit-debug"
+      style={{
+        left: (from.x + to.x) / 2 - r,
+        top: (from.y + to.y) / 2 - length / 2 - r,
+        width: r * 2,
+        height: length + r * 2,
+        borderRadius: r,
+        transform: `rotate(${angle}rad)`,
+      }}
+    />
   )
 }
