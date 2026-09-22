@@ -16,8 +16,9 @@ main {
   -webkit-touch-callout: none;
 }
 
-.eye-debug {
+.hit-debug {
   position: absolute;
+  z-index: 1;
   border: 2px solid #f0f;
   border-radius: 50%;
   box-sizing: border-box;
