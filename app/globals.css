@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  background: #000;
+}
+
+main {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}

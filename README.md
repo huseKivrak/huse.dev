@@ -1,6 +1,6 @@
 # huse.dev
 
-A Vite + TypeScript project.
+A Next.js + TypeScript project.
 
 ## Getting Started
 
@@ -8,12 +8,12 @@ A Vite + TypeScript project.
 # Install dependencies
 npm install
 
-# Run development server
+# Run development server (http://localhost:3000)
 npm run dev
 
 # Build for production
 npm run build
 
-# Preview production build
-npm run preview
+# Serve production build
+npm start
 ```

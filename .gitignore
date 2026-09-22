@@ -25,3 +25,9 @@ dist-ssr
 
 # Vercel CLI link/env
 .vercel
+
+# Next.js
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
