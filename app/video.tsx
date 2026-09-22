@@ -12,6 +12,7 @@ type Player = {
   mute(): void
   unMute(): void
   setVolume(volume: number): void
+  getPlayerState(): number
 }
 
 type PlayerEvent = { target: Player; data: number }
@@ -20,7 +21,7 @@ declare global {
   interface Window {
     YT?: {
       Player: new (el: HTMLElement, options: object) => Player
-      PlayerState: { PLAYING: number }
+      PlayerState: { PLAYING: number; PAUSED: number }
     }
     onYouTubeIframeAPIReady?: () => void
   }
@@ -40,7 +41,7 @@ function loadApi(): Promise<void> {
   })
 }
 
-// A full-screen YouTube player that loads hidden as soon as the page opens
+// A full-screen YouTube player that loads under the photo as soon as the page opens
 // on a touch device, so play() starts the video with no loading delay.
 export function useVideo() {
   const mountRef = useRef<HTMLDivElement>(null)
@@ -54,12 +55,19 @@ export function useVideo() {
     p.seekTo(0, true)
     p.playVideo()
     // Phones only allow sound after a user activation, which touchstart is
-    // not, so the video starts muted and unmutes when a thumb lifts.
+    // not, so the video starts muted and unmutes when a thumb lifts. iOS may
+    // still refuse sound and pause instead; if so, keep playing muted.
     window.addEventListener(
       'touchend',
       () => {
         p.unMute()
         p.setVolume(100)
+        setTimeout(() => {
+          if (p.getPlayerState() === window.YT!.PlayerState.PAUSED) {
+            p.mute()
+            p.playVideo()
+          }
+        }, 300)
       },
       { once: true }
     )
@@ -92,7 +100,7 @@ export function useVideo() {
             player.current = target
             target.mute()
             if (wanted.current) start()
-            // Briefly play muted while hidden so the opening is buffered.
+            // Briefly play muted under the photo so the opening is buffered.
             else target.playVideo()
           },
           onStateChange: ({ target, data }: PlayerEvent) => {
