@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import artemis from '@/public/artemis.png'
+import Door from './door'
 import { ScratchDetector } from './scratch'
 import { useVideo } from './video'
 
@@ -27,6 +28,13 @@ const EYE_RADIUS = 0.12
 // The radius is a fraction of the rendered photo width.
 const NOSE = { from: { x: 0.466, y: 0.42 }, to: { x: 0.456, y: 0.7 }, r: 0.08 }
 
+// Five quick taps (or clicks) on the nose, each within this long of the last.
+const BOOPS = 5
+const BOOP_GAP_MS = 1200
+// A tap is short and stays put; anything longer or further is a scratch or a drag.
+const TAP_MS = 500
+const TAP_SLOP = 0.03
+
 type Circle = Point & { r: number }
 type Capsule = { from: Point; to: Point; r: number }
 
@@ -47,11 +55,14 @@ function layout(rect: DOMRect) {
   }
 }
 
+// Anything with a screen position: a touch or a pointer event.
+type Spot = { clientX: number; clientY: number }
+
 function inCircle(touch: Touch, circle: Circle): boolean {
   return Math.hypot(touch.clientX - circle.x, touch.clientY - circle.y) <= circle.r
 }
 
-function inCapsule(touch: Touch, { from, to, r }: Capsule): boolean {
+function inCapsule(touch: Spot, { from, to, r }: Capsule): boolean {
   const dx = to.x - from.x
   const dy = to.y - from.y
   const along = ((touch.clientX - from.x) * dx + (touch.clientY - from.y) * dy) / (dx * dx + dy * dy)
@@ -72,6 +83,7 @@ function thumbsOnBothEyes(touches: TouchList, [a, b]: Circle[]): boolean {
 export default function Artemis() {
   const ref = useRef<HTMLElement>(null)
   const [debug, setDebug] = useState<ReturnType<typeof layout> | null>(null)
+  const [door, setDoor] = useState(false)
   const rickroll = useVideo('dQw4w9WgXcQ') // Rick Astley, Never Gonna Give You Up
   const knicks = useVideo('YgevWWlg5LI') // Golden Hoops, Knicks 2026 championship mini-movie
 
@@ -83,6 +95,10 @@ export default function Artemis() {
     // Her nose scratched enough.
     nose() {
       knicks.play()
+    },
+    // Her nose booped five times.
+    boop() {
+      setDoor(true)
     },
   }
   const actionsRef = useRef(actions)
@@ -121,6 +137,49 @@ export default function Artemis() {
     return () => events.forEach((type) => el.removeEventListener(type, check))
   }, [])
 
+  // Taps and clicks on the nose, counted on every kind of device. Pointer events
+  // still arrive when the touch handler above cancels the touches.
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    let down: { id: number; x: number; y: number; t: number } | null = null
+    let boops: number[] = []
+
+    function press(event: PointerEvent) {
+      down = { id: event.pointerId, x: event.clientX, y: event.clientY, t: event.timeStamp }
+    }
+
+    function release(event: PointerEvent) {
+      if (!down || down.id !== event.pointerId) return
+      const regions = layout(el!.getBoundingClientRect())
+      const tap =
+        event.timeStamp - down.t <= TAP_MS &&
+        Math.hypot(event.clientX - down.x, event.clientY - down.y) <= TAP_SLOP * regions.width
+      down = null
+      if (!tap || !inCapsule(event, regions.nose)) {
+        boops = []
+        return
+      }
+      if (boops.length && event.timeStamp - boops[boops.length - 1] > BOOP_GAP_MS) boops = []
+      boops.push(event.timeStamp)
+      if (boops.length >= BOOPS) {
+        boops = []
+        actionsRef.current.boop()
+      }
+    }
+
+    const cancel = () => (down = null)
+    el.addEventListener('pointerdown', press)
+    el.addEventListener('pointerup', release)
+    el.addEventListener('pointercancel', cancel)
+    return () => {
+      el.removeEventListener('pointerdown', press)
+      el.removeEventListener('pointerup', release)
+      el.removeEventListener('pointercancel', cancel)
+    }
+  }, [])
+
   // Visit /?eyes to see the hit areas while tuning them.
   useEffect(() => {
     if (!new URLSearchParams(window.location.search).has('eyes')) return
@@ -131,33 +190,36 @@ export default function Artemis() {
   }, [])
 
   return (
-    <main ref={ref}>
-      <Image
-        src={artemis}
-        alt="Artemis the cat"
-        fill
-        priority
-        placeholder="blur"
-        sizes="100vw"
-        draggable={false}
-        style={{
-          objectFit: 'cover',
-          objectPosition: `${POSITION.x * 100}% ${POSITION.y * 100}%`,
-          zIndex: 1,
-        }}
-      />
-      {debug?.eyes.map((eye, i) => (
-        <div
-          key={i}
-          className="hit-debug"
-          style={{ left: eye.x - eye.r, top: eye.y - eye.r, width: eye.r * 2, height: eye.r * 2 }}
+    <>
+      <main ref={ref}>
+        <Image
+          src={artemis}
+          alt="Artemis the cat"
+          fill
+          priority
+          placeholder="blur"
+          sizes="100vw"
+          draggable={false}
+          style={{
+            objectFit: 'cover',
+            objectPosition: `${POSITION.x * 100}% ${POSITION.y * 100}%`,
+            zIndex: 1,
+          }}
         />
-      ))}
-      {debug && <CapsuleOutline {...debug.nose} />}
-      {[rickroll, knicks].map((video, i) => (
-        <div key={i} ref={video.mountRef} className={video.visible ? 'video on' : 'video'} />
-      ))}
-    </main>
+        {debug?.eyes.map((eye, i) => (
+          <div
+            key={i}
+            className="hit-debug"
+            style={{ left: eye.x - eye.r, top: eye.y - eye.r, width: eye.r * 2, height: eye.r * 2 }}
+          />
+        ))}
+        {debug && <CapsuleOutline {...debug.nose} />}
+        {[rickroll, knicks].map((video, i) => (
+          <div key={i} ref={video.mountRef} className={video.visible ? 'video on' : 'video'} />
+        ))}
+      </main>
+      {door && <Door onClose={() => setDoor(false)} />}
+    </>
   )
 }
 
