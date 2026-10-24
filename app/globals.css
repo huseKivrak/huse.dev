@@ -41,3 +41,81 @@ main {
   z-index: 2;
   pointer-events: auto;
 }
+
+/* The riddle that opens from Artemis's nose: quiet, low on the screen, above
+   everything else. It sits outside <main> so typing works on phones. */
+.door {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 14vh;
+  padding-bottom: 14dvh;
+}
+
+.riddle {
+  margin: 0;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.82);
+  /* 16px keeps iOS from zooming in when the answer box is focused */
+  font:
+    300 16px/1.5 system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  letter-spacing: 0.04em;
+  animation: door-in 700ms ease-out both;
+}
+
+.riddle input {
+  width: 4.5em;
+  margin-left: 0.4em;
+  padding: 0 0.1em;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 0;
+  background: none;
+  color: #fff;
+  font: inherit;
+  text-align: center;
+  caret-color: #fff;
+  outline: none;
+}
+
+.riddle.wrong {
+  animation: door-shake 380ms ease-in-out;
+}
+
+.riddle.opening {
+  opacity: 0.6;
+}
+
+.riddle a {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+@keyframes door-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes door-shake {
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}
