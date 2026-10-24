@@ -1,9 +1,9 @@
 // A sealed file behind the riddle on Artemis's nose. Only a salt and a check value live here:
 // the answer is never stored, and the file, name and all, can't be read without it.
 
-const SEALED = '/nose/f54f9a9f7ef7.bin'
-const SALT = '2c9ac889a98a10636f8b3bc6c39b130a'
-const CHECK = '5dddab236830110b893da21d6905613576ce8198ed6ef855bb226171714af2c0'
+const SEALED = '/nose/2f8a9db8f64c.bin'
+const SALT = '62b96b09b2254b272cf3f5f4781df424'
+const CHECK = 'a35e00ddcd7ad6fb1f4e33e88ee628707f6f3d58a1eec5b3eb0a1d3f578fa818'
 const ROUNDS = 200_000
 
 // Answers are compared letters only, lowercased, with repeats collapsed, so however
